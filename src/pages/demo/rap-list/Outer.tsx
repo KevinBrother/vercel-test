@@ -1,87 +1,94 @@
 // TODO 支持别名
 // import { ReactIcon } from '@/assets' 
-
-import React, { CSSProperties } from 'react'
-import { isFunction, omit } from 'lodash-es'
+import React, { ReactNode } from 'react';
+import { CSSProperties } from 'react';
 import { ReactIcon } from '../../../assets';
-import './index.less'
+import './index.less';
 
-interface IData {
-  icon?: React.ReactNode;
-  content: any;
-  suffix?: React.ReactNode;
-  onClick?: (data: IData) => void;
+interface IRpaListProps<T> {
+  style?: CSSProperties | undefined;
+  dataSource: T[];
+  renderItem: (item: T, index: number) => ReactNode;
 }
 
-interface IProps {
-  data: IData[];
-  outerStyle?: CSSProperties | undefined;
-  innerStyle?: CSSProperties | undefined;
-}
+export function RpaList<T>(props: IRpaListProps<T>) {
+  const { style, dataSource, renderItem } = props;
 
-function RpaList(props: IProps) {
-  const { outerStyle, innerStyle, data } = props;
-
-  const defaultOuterStyle = {
+  const defaultStyle = {
     background: '#FFFFFF',
     boxShadow: '0px 2px 10px 4px rgba(0, 0, 0, 0.06)',
     borderRadius: '4px',
     border: '1px solid #E9EBEC',
     padding: '8px',
     width: '200px',
-    ...outerStyle
-  }
-
-  const defaultInnerStyle = {
-    padding: '8px',
-    cursor: 'pointer',
-    ...innerStyle
-  }
+    ...style
+  };
 
   return (
-    <ul style={defaultOuterStyle} className="wrapper">
-      {data.map((item, index) => {
-        const { icon, content, suffix, onClick } = item;
-        const restProps = omit(item, ['onClick']);
-        return (
-          <li onClick={() => onClick && isFunction(onClick) && onClick(restProps)} style={defaultInnerStyle} className="flex-justify-between" key={index}>
-            <div className="flex-all-center">
-              <span className='rap-list-icon'> {icon} </span>
-              <span> {content} </span>
-            </div>
-            <span> {suffix} </span>
-          </li>
-        )
+    <ul style={defaultStyle} className='rpa-list'>
+      {dataSource.map((item, index) => {
+        return renderItem(item, index);
       })}
     </ul>
-  )
+  );
 }
 
+interface IRpaListItemProps {
+  icon?: React.ReactNode;
+  content: any;
+  suffix?: React.ReactNode;
+  onClick?: () => void;
+  style?: CSSProperties | undefined;
+}
 
+export function RpaListItem(props: IRpaListItemProps) {
+  const { style, icon, content, suffix, onClick } = props;
+  const defaultStyle = {
+    padding: '8px',
+    cursor: 'pointer',
+    ...style
+  };
 
+  return (<li onClick={onClick} style={defaultStyle} className='flex-justify-between'>
+    <div className='flex-all-center'>
+      <span className='rap-list-icon'> {icon} </span>
+      <span> {content} </span>
+    </div>
+    <span> {suffix} </span>
+  </li>
+  );
+}
 
-export default function good() {
-  const data: IData[] = [
+export default function A() {
+  const data = [
     {
       icon: <ReactIcon style={{ width: '16px', height: '16px' }} />,
       content: 'first',
       suffix: 'good',
-      onClick: (value: IData) => {
-        console.log(value);
+      onClick: (item) => {
+        console.log(item);
       }
     },
     {
       icon: <ReactIcon style={{ width: '16px', height: '16px' }} />,
       content: 'send',
       suffix: 'nice',
-      onClick: (value: IData) => {
+      onClick: (value) => {
         console.log(value);
       }
     }
   ]
 
-  return <RpaList data={data} />
-
-}
-
-
+  return (
+    <RpaList dataSource={data} renderItem={({ icon, content, suffix }, index) => (
+      <RpaListItem
+        icon={icon}
+        content={content}
+        suffix={suffix}
+        onClick={() => console.log({ icon, content, suffix, index })
+        }
+      />
+    )}
+    />
+  )
+} 
