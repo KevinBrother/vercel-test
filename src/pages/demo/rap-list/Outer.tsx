@@ -2,6 +2,7 @@
 // import { ReactIcon } from '@/assets' 
 
 import React, { CSSProperties } from 'react'
+import { isFunction, omit } from 'lodash-es'
 import { ReactIcon } from '../../../assets';
 import './index.less'
 
@@ -9,7 +10,7 @@ interface IData {
   icon?: React.ReactNode;
   content: any;
   suffix?: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (data: IData) => void;
 }
 
 interface IProps {
@@ -38,41 +39,43 @@ function RpaList(props: IProps) {
   }
 
   return (
-    <div>
-      1212
-      <ul style={defaultOuterStyle} className="wrapper">
-        {data.map(({ icon, content, suffix, onClick }, index) => {
-          return (
-            <li onClick={onClick} style={defaultInnerStyle} className="flex-justify-between" key={index}>
-              <div className="flex-all-center">
-                <span className='rap-list-icon'> {icon} </span>
-                <span> {content} </span>
-              </div>
-              <span> {suffix} </span>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
+    <ul style={defaultOuterStyle} className="wrapper">
+      {data.map((item, index) => {
+        const { icon, content, suffix, onClick } = item;
+        const restProps = omit(item, ['onClick']);
+        return (
+          <li onClick={() => onClick && isFunction(onClick) && onClick(restProps)} style={defaultInnerStyle} className="flex-justify-between" key={index}>
+            <div className="flex-all-center">
+              <span className='rap-list-icon'> {icon} </span>
+              <span> {content} </span>
+            </div>
+            <span> {suffix} </span>
+          </li>
+        )
+      })}
+    </ul>
   )
 }
+
+
+
 
 export default function good() {
   const data: IData[] = [
     {
       icon: <ReactIcon style={{ width: '16px', height: '16px' }} />,
-      content: ';ads',
+      content: 'first',
       suffix: 'good',
-      onClick: () => {
-        console.log('[ 1 ] >', 1)
+      onClick: (value: IData) => {
+        console.log(value);
       }
     },
     {
       icon: <ReactIcon style={{ width: '16px', height: '16px' }} />,
-      content: ';ada',
-      suffix: 'good',
-      onClick: () => {
-        console.log('[ 2 ] >', 2)
+      content: 'send',
+      suffix: 'nice',
+      onClick: (value: IData) => {
+        console.log(value);
       }
     }
   ]
