@@ -1,15 +1,33 @@
 .wrapper {
-  border: 1px solid pink;
-
   > ul {
     list-style: none;
     padding: 0;
     margin: 0;
+
+    li {
+      display: block;
+    }
   }
 
-  .inner-wrapper {
-     border: 1px solid rgb(38, 65, 124);
-     display: flex;
-     align-items: center;
+  // li{
+  //   background-color: pink;
+  // }
+
+/*   li:not(:last-child){
+    border-bottom: 1px solid blue;
+  } */
+
+  li:not(:first-child){
+    margin-top: 4px;
   }
+
+  li:hover{
+    background: #EFF2F9;
+    border-radius: 4px;
+  }
+
+  .rap-list-icon {
+    margin-right: 4px;
+  }
+
 }

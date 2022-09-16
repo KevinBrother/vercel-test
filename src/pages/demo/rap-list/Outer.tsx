@@ -1,57 +1,84 @@
 // TODO 支持别名
 // import { ReactIcon } from '@/assets' 
 
-import React, { useState } from 'react'
+import React, { CSSProperties } from 'react'
 import { ReactIcon } from '../../../assets';
 import './index.less'
 
-interface IProps {
+interface IData {
   icon?: React.ReactNode;
   content: any;
   suffix?: React.ReactNode;
+  onClick?: () => void;
 }
 
-// outer-style
-// inner-style
+interface IProps {
+  data: IData[];
+  outerStyle?: CSSProperties | undefined;
+  innerStyle?: CSSProperties | undefined;
+}
 
-export default function RpaList() {
+function RpaList(props: IProps) {
+  const { outerStyle, innerStyle, data } = props;
 
-  const outerStyle = {
-    padding: '8px'
+  const defaultOuterStyle = {
+    background: '#FFFFFF',
+    boxShadow: '0px 2px 10px 4px rgba(0, 0, 0, 0.06)',
+    borderRadius: '4px',
+    border: '1px solid #E9EBEC',
+    padding: '8px',
+    width: '200px',
+    ...outerStyle
   }
-  const innerStyle = {
-    padding: '8px'
-  }
 
-  const data: IProps[] = [
-    {
-      icon: <ReactIcon style={{ width: '16px', height: '16px' }} />,
-      content: ';asldjfpoqwefasdf',
-      suffix: 'good'
-    },
-    {
-      icon: <ReactIcon style={{ width: '16px', height: '16px' }} />,
-      content: ';asldjfpoqwefasdf',
-      suffix: 'good'
-    }
-  ]
+  const defaultInnerStyle = {
+    padding: '8px',
+    cursor: 'pointer',
+    ...innerStyle
+  }
 
   return (
     <div>
       1212
-      {data.map(({ icon, content, suffix }, index) => {
-        return (
-          <div key={index} style={outerStyle} className="wrapper">
-            <ul style={innerStyle} className="inner-wrapper">
-              <li> <div> {icon} </div></li>
-              <li> {content}  </li>
-              <li> {suffix}  </li>
-            </ul>
-          </div>
-        )
-      })}
+      <ul style={defaultOuterStyle} className="wrapper">
+        {data.map(({ icon, content, suffix, onClick }, index) => {
+          return (
+            <li onClick={onClick} style={defaultInnerStyle} className="flex-justify-between" key={index}>
+              <div className="flex-all-center">
+                <span className='rap-list-icon'> {icon} </span>
+                <span> {content} </span>
+              </div>
+              <span> {suffix} </span>
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
+}
+
+export default function good() {
+  const data: IData[] = [
+    {
+      icon: <ReactIcon style={{ width: '16px', height: '16px' }} />,
+      content: ';ads',
+      suffix: 'good',
+      onClick: () => {
+        console.log('[ 1 ] >', 1)
+      }
+    },
+    {
+      icon: <ReactIcon style={{ width: '16px', height: '16px' }} />,
+      content: ';ada',
+      suffix: 'good',
+      onClick: () => {
+        console.log('[ 2 ] >', 2)
+      }
+    }
+  ]
+
+  return <RpaList data={data} />
+
 }
 
 
