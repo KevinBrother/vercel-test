@@ -23,7 +23,8 @@
 
 - [x] antd-ui
   - [ ] 样式按需加载
-- [ ] asset别名的支持
+- [x] asset别名的支持
+  - [有三种方式可以实现](./docs/Asset.md)
 - [ ] react-router
 - [ ] 定义数据结构
 - [ ] 列表界面+新增
