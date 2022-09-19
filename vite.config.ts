@@ -6,6 +6,9 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    open: true,
+  },
   plugins: [react(), svgr(), tsconfigPaths()],
   /*   css: {
       preprocessorOptions: {
@@ -19,11 +22,8 @@ export default defineConfig({
       {
         find: /^~/,
         replacement: '',
-      },
-      {
-        find: '@',
-        replacement: path.resolve(__dirname, './src')
       }
+
     ],
   }
 })

@@ -1,8 +1,6 @@
-// TODO 支持别名
-// import { ReactIcon } from '@/assets' 
+import { ReactIcon } from '@/assets'
 import React, { ReactNode } from 'react';
 import { CSSProperties } from 'react';
-import { ReactIcon } from '../../../assets';
 import './index.less';
 
 interface IRpaListProps<T> {
