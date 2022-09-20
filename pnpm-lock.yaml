@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@types/lodash-es': ^4.17.6
+  '@types/mockjs': ^1.0.6
   '@types/react': ^18.0.17
   '@types/react-dom': ^18.0.6
   '@vitejs/plugin-react': ^2.1.0
@@ -28,6 +29,7 @@ dependencies:
 
 devDependencies:
   '@types/lodash-es': 4.17.6
+  '@types/mockjs': 1.0.6
   '@types/react': 18.0.20
   '@types/react-dom': 18.0.6
   '@vitejs/plugin-react': 2.1.0_vite@3.1.1
@@ -568,6 +570,10 @@ packages:
 
   /@types/lodash/4.14.185:
     resolution: {integrity: sha512-evMDG1bC4rgQg4ku9tKpuMh5iBNEwNa3tf9zRHdP1qlv+1WUg44xat4IxCE14gIpZRGUUWAx2VhItCZc25NfMA==}
+    dev: true
+
+  /@types/mockjs/1.0.6:
+    resolution: {integrity: sha512-Yu5YlqbYZyqsd6LjO4e8ONJDN9pTSnciHDcRP4teNOh/au2b8helFhgRx+3w8xsTFEnwr9jtfTVJbAx+eYmlHA==}
     dev: true
 
   /@types/parse-json/4.0.0:
