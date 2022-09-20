@@ -80,6 +80,7 @@ export default function A() {
   return (
     <RpaList dataSource={data} renderItem={({ icon, content, suffix }, index) => (
       <RpaListItem
+        key={index}
         icon={icon}
         content={content}
         suffix={suffix}

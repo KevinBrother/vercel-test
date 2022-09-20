@@ -1,14 +1,24 @@
+import { BaseRouter, MenuRouter } from '@/routes'
+import { useRoutes, Link } from 'react-router-dom';
 
-import MenuList from '../menu-list';
-import Start from '../start';
-import Outer from '../demo/rap-list/Outer';
+function Container() {
+  const element = useRoutes(MenuRouter.concat(BaseRouter));
+  return <div style={{ marginLeft: '30px' }}>{element}</div>;
+}
 
 function App() {
   return (
     <>
-      {/*   <Start />
-      <MenuList /> */}
-      <Outer />
+      {MenuRouter.map(router => {
+        const { path } = router;
+
+        return (
+          <li key={path}>
+            <Link to={path}>{path.replace('/', '')}</Link>
+          </li>
+        );
+      })}
+      <Container />
     </>
   )
 }
