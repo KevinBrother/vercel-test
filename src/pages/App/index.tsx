@@ -8,18 +8,20 @@ function Container() {
 
 function App() {
   return (
-    <>
-      {MenuRouter.map(router => {
-        const { path } = router;
+    <div style={{ display: 'flex' }}>
+      <ul>
+        {MenuRouter.map(router => {
+          const { path } = router;
 
-        return (
-          <li key={path}>
-            <Link to={path}>{path.replace('/', '')}</Link>
-          </li>
-        );
-      })}
+          return (
+            <li key={path}>
+              <Link to={path}>{path.replace('/', '')}</Link>
+            </li>
+          );
+        })}
+      </ul>
       <Container />
-    </>
+    </div>
   )
 }
 
