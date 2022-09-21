@@ -2,7 +2,7 @@ import React from "react";
 import { useRoutes } from "react-router-dom";
 import Start from "@/pages/start";
 import MenuList from "@/pages/menu-list";
-import { RpaList } from "@/pages/Demo";
+import RpaListDemo from "@/pages/demo/rpa-list-demo";
 
 export const MenuRouter = [
   {
@@ -10,8 +10,8 @@ export const MenuRouter = [
     element: <Start />,
   },
   {
-    path: "demo", // TODO 做demo的子路由
-    element: <RpaList />,
+    path: "rpa-list-demo", // TODO 做demo的子路由
+    element: <RpaListDemo />,
   },
   {
     path: "MenuList",

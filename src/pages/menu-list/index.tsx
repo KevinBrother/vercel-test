@@ -47,7 +47,7 @@ const data: DataType[] = [
   },
 ];
 
-var mockData = mock({
+/* var mockData = mock({
   // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
   'list|1-10': [{
     // 属性 id 是一个自增数，起始值为 1，每次增 1
@@ -55,7 +55,19 @@ var mockData = mock({
     name: mock('@name'),
     address: mock('@city')
   }]
+}) */
+var mockData = mock({
+  "list|1-10": [
+    {
+      key: '@increment(1)',
+      age: '@number(1)',
+      name: "@ctitle",
+      address: "@cparagraph",
+      "add_time": "@date(yyyy-MM-dd hh:mm:ss)"
+    }
+  ]
 })
+
 console.log('%c [ mockData ]-51', 'font-size:13px; background:pink; color:#bf2c9f;', mockData);
 
 export default function MenuList() {
