@@ -1,8 +1,10 @@
-import React from "react";
-import { useRoutes } from "react-router-dom";
-import Start from "@/pages/start";
-import MenuList from "@/pages/menu-list";
-import RpaListDemo from "@/pages/demo/rpa-list-demo";
+import loadable from '@loadable/component';
+
+const Start = loadable(() => import('@/pages/start'));
+const MenuList = loadable(() => import('@/pages/menu-list'));
+
+// Demo
+const RpaListDemo = loadable(() => import('@/pages/demo/rpa-list-demo'));
 
 export const MenuRouter = [
   {
