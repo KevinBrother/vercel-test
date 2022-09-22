@@ -1,7 +1,7 @@
-import { Button, Table } from 'antd'
+import { Button, Space } from 'antd'
 import type { ColumnsType } from 'antd/es/table';
 import { mock, Random } from 'mockjs';
-import { PageContainer } from '@bixi-design/core';
+import { PageContainer, Table } from '@bixi-design/core';
 import { PlusOutlined } from '@bixi-design/icons';
 
 interface DataType {
@@ -12,52 +12,6 @@ interface DataType {
   tags: string[];
 }
 
-const columns: ColumnsType<DataType> = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  }
-]
-
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
-
-/* var mockData = mock({
-  // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-  'list|1-10': [{
-    // 属性 id 是一个自增数，起始值为 1，每次增 1
-    'key|+1': 1,
-    name: mock('@name'),
-    address: mock('@city')
-  }]
-}) */
 var mockData = mock({
   "list|1-10": [
     {
@@ -65,16 +19,44 @@ var mockData = mock({
       age: '@integer(20, 70)',
       name: "@ctitle",
       address: "@cparagraph",
-      "add_time": "@date(yyyy-MM-dd hh:mm:ss)"
+      "add_time": "@date(yyyy-MM-dd hh:mm:ss)",
     }
   ]
 })
 
-console.log('%c [ mockData ]-51', 'font-size:13px; background:pink; color:#bf2c9f;', mockData);
 
 export default function MenuList() {
+
+  const columns: ColumnsType<DataType> = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <Button onClick={() => handleClick(record)}>下层菜单</Button>
+          <Button onClick={() => handleClick(record)}>编辑</Button>
+          <Button onClick={() => handleClick(record)}>删除</Button>
+        </Space>
+      ),
+    },
+  ]
+
   function onAdd() {
     console.log(1);
+  }
+
+  function handleClick(record) {
+    console.log(record);
   }
 
   return (
@@ -82,7 +64,7 @@ export default function MenuList() {
       <Button icon={<PlusOutlined />} type='primary' style={{ marginBottom: '16px' }} onClick={onAdd}>
         创建场景
       </Button>
-      <Table columns={columns} dataSource={mockData.list} />
+      <Table striped={true} columns={columns} dataSource={mockData.list} />
     </PageContainer>
   )
 }
