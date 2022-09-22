@@ -1,7 +1,8 @@
-import { Table } from 'antd'
+import { Button, Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table';
 import { mock, Random } from 'mockjs';
 import { PageContainer } from '@bixi-design/core';
+import { PlusOutlined } from '@bixi-design/icons';
 
 interface DataType {
   key: string;
@@ -72,8 +73,15 @@ var mockData = mock({
 console.log('%c [ mockData ]-51', 'font-size:13px; background:pink; color:#bf2c9f;', mockData);
 
 export default function MenuList() {
+  function onAdd() {
+    console.log(1);
+  }
+
   return (
     <PageContainer>
+      <Button icon={<PlusOutlined />} type='primary' style={{ marginBottom: '16px' }} onClick={onAdd}>
+        创建场景
+      </Button>
       <Table columns={columns} dataSource={mockData.list} />
     </PageContainer>
   )

@@ -9,13 +9,13 @@ export default defineConfig({
     open: true,
   },
   plugins: [react(), svgr(), tsconfigPaths()],
-  /*   css: {
-      preprocessorOptions: {
-        less: {
-          javascriptEnabled: true,
-        },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
       },
-    }, */
+    },
+  },
   resolve: {
     alias: [
       {

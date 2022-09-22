@@ -4,5 +4,8 @@ module.exports = {
   theme: {
     extend: {}
   },
-  plugins: []
+  plugins: [],
+  corePlugins: {
+    preflight: false // 如果是true会把button颜色默认改为白色
+  }
 };
