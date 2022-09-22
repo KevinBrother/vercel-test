@@ -1,6 +1,7 @@
 import { Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table';
 import { mock, Random } from 'mockjs';
+import { PageContainer } from '@bixi-design/core';
 
 interface DataType {
   key: string;
@@ -72,6 +73,8 @@ console.log('%c [ mockData ]-51', 'font-size:13px; background:pink; color:#bf2c9
 
 export default function MenuList() {
   return (
-    <Table columns={columns} dataSource={mockData.list} />
+    <PageContainer>
+      <Table columns={columns} dataSource={mockData.list} />
+    </PageContainer>
   )
 }

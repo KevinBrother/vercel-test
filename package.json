@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bixi-rpa/core": "^2.0.1",
+    "@bixi-design/core": "2.2.2",
     "@loadable/component": "^5.15.2",
     "antd": "^4.23.1",
     "lodash-es": "^4.17.21",
