@@ -1,6 +1,6 @@
 import { Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table';
-import { mock } from 'mockjs';
+import { mock, Random } from 'mockjs';
 
 interface DataType {
   key: string;
@@ -60,7 +60,7 @@ var mockData = mock({
   "list|1-10": [
     {
       key: '@increment(1)',
-      age: '@number(1)',
+      age: '@integer(20, 70)',
       name: "@ctitle",
       address: "@cparagraph",
       "add_time": "@date(yyyy-MM-dd hh:mm:ss)"
