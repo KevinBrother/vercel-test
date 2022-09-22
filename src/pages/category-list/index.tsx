@@ -3,6 +3,8 @@ import type { ColumnsType } from 'antd/es/table';
 import { mock, Random } from 'mockjs';
 import { PageContainer, Table } from '@bixi-design/core';
 import { PlusOutlined } from '@bixi-design/icons';
+import EditDialog from './components/edit-dialog';
+import { useEditDialog } from './hooks/edit-dialog';
 
 interface DataType {
   key: string;
@@ -26,6 +28,8 @@ var mockData = mock({
 
 
 export default function MenuList() {
+
+  const { render: editDialogRender, setIsModalOpen: setIsEditDialogOpen } = useEditDialog();
 
   const columns: ColumnsType<DataType> = [
     {
@@ -57,6 +61,7 @@ export default function MenuList() {
 
   function handleClick(record) {
     console.log(record);
+    setIsEditDialogOpen(true);
   }
 
   return (
@@ -65,6 +70,7 @@ export default function MenuList() {
         创建场景
       </Button>
       <Table striped={true} columns={columns} dataSource={mockData.list} />
+      {editDialogRender}
     </PageContainer>
   )
 }
