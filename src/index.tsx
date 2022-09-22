@@ -5,7 +5,5 @@ import { BrowserRouter } from "react-router-dom";
 import './styles/global.less'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <BrowserRouter>
-    <Root />
-  </BrowserRouter>
+  <Root />
 )

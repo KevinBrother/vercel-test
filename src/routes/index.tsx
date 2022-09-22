@@ -1,6 +1,6 @@
 import { BaseRouter } from './base-router'
 import { MenuRouter } from './menu-router'
-import { useRoutes, Link } from 'react-router-dom';
+import { useRoutes, Link, BrowserRouter } from 'react-router-dom';
 
 function Container() {
   const element = useRoutes(MenuRouter.concat(BaseRouter));
@@ -9,20 +9,22 @@ function Container() {
 
 function Root() {
   return (
-    <div style={{ display: 'flex' }}>
-      <ul>
-        {MenuRouter.map(router => {
-          const { path } = router;
+    <BrowserRouter >
+      <div style={{ display: 'flex' }}>
+        <ul>
+          {MenuRouter.map(router => {
+            const { path } = router;
 
-          return (
-            <li key={path}>
-              <Link to={path}>{path.replace('/', '')}</Link>
-            </li>
-          );
-        })}
-      </ul>
-      <Container />
-    </div>
+            return (
+              <li key={path}>
+                <Link to={path}>{path.replace('/', '')}</Link>
+              </li>
+            );
+          })}
+        </ul>
+        <Container />
+      </div>
+    </BrowserRouter >
   )
 }
 
