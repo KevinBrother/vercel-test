@@ -14,6 +14,8 @@ specifiers:
   '@vitejs/plugin-react': ^2.1.0
   antd: ^4.23.1
   autoprefixer: ^10.4.11
+  classnames: ^2.3.2
+  jquery: ^3.6.1
   lodash-es: ^4.17.21
   mockjs: ^1.1.0
   postcss: ^8.4.16
@@ -33,6 +35,7 @@ dependencies:
   '@bixi-rpa/core': 2.0.1_oxovrkbujshwkijrbfrxjoa62q
   '@loadable/component': 5.15.2_react@18.2.0
   antd: 4.23.1_biqbaboplfbrettd7655fr4n2y
+  classnames: 2.3.2
   lodash-es: 4.17.21
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -46,6 +49,7 @@ devDependencies:
   '@types/react-dom': 18.0.6
   '@vitejs/plugin-react': 2.1.0_vite@3.1.1
   autoprefixer: 10.4.11_postcss@8.4.16
+  jquery: 3.6.1
   mockjs: 1.1.0
   postcss: 8.4.16
   tailwindcss: 3.1.8_postcss@8.4.16
@@ -1433,6 +1437,10 @@ packages:
   /is-url/1.2.4:
     resolution: {integrity: sha512-ITvGim8FhRiYe4IQ5uHSkj7pVaPDrCTkNd3yq3cV7iZAcJdHTUMPMEHcqSOy9xZ9qFenQCvi+2wjH9a1nXqHww==}
     dev: false
+
+  /jquery/3.6.1:
+    resolution: {integrity: sha512-opJeO4nCucVnsjiXOE+/PcCgYw9Gwpvs/a6B1LL/lQhwWwpbVEVYDZ1FokFr8PRc7ghYlrFPuyHuiiDNTQxmcw==}
+    dev: true
 
   /js-cookie/2.2.1:
     resolution: {integrity: sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==}

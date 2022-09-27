@@ -15,7 +15,6 @@ function Root() {
         <ul>
           {MenuRouter.map(router => {
             const { path } = router;
-
             return (
               <li key={path}>
                 <Link to={path}>{path.replace('/', '')}</Link>

@@ -39,9 +39,10 @@
 
 ### 服务端
 
-[] node
+- [ ] node
 
 ### devops
 
-[] docker
-[] ci/cd
+- [ ] docker
+- [ ] ci/cd
+  - [ ] gitlib
