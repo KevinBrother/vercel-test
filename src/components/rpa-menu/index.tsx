@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import classnames from 'classnames';
 import $ from 'jquery';
 import './index.less'
@@ -9,33 +9,32 @@ interface IRpaMenu {
   onClick: Function;
 }
 export function RpaMenu({ dataSource, defaultKey }: { dataSource: IRpaMenu[], defaultKey: string }) {
+  const menuRef = useRef(null);
 
+  useEffect(() => {
+    const lis = menuRef?.current?.querySelectorAll('li');
+    const liFindIndex = [].findIndex.bind(lis);
+    const activeIndex = liFindIndex(item => item.className === 'active');
+
+    if (activeIndex > 0) {
+      lis[activeIndex - 1].classList.add("active-prev")
+    }
+  })
+  // menuRef.current?.querySelector('li');
+  // document.querySelector('li')
+  // const liFindIndex = [].findIndex.bind(li)
+  // liFindIndex(item => item.className === 'active')
   return (
     <div className="rpa-menu">
-      <ul>
+      <ul ref={menuRef}>
         {
           dataSource.map(({ key, text, onClick }) => (
             <li onClick={() => onClick()} key={key} className={classnames({ 'active': defaultKey === key })}>
-              <div>{text}</div>
+              <div>{text} {key}</div>
             </li>
           ))
         }
       </ul>
     </div>
   )
-  /*   return (
-      <div className="rpa-menu-demo">
-        <ul>
-          <li className="active">
-            <div>1212</div>
-          </li>
-          <li>
-            <div>1212</div>
-          </li>
-          <li><div>adaqw</div></li>
-          <li><div>adaqw</div></li>
-        </ul>
-      </div>
-  
-    ) */
 }

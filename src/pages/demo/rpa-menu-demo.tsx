@@ -4,7 +4,7 @@ import { RpaMenu } from "@/components";
 export default function RpaListDemo() {
   const data = [
     {
-      ley: '1',
+      key: '1',
       text: 'dataIndex',
       onClick: (item) => {
         console.log(item);
@@ -12,6 +12,13 @@ export default function RpaListDemo() {
     },
     {
       key: '2',
+      text: 'nice',
+      onClick: (value) => {
+        console.log(value);
+      }
+    },
+    {
+      key: '3',
       text: 'nice',
       onClick: (value) => {
         console.log(value);
