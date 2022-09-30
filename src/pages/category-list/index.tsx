@@ -1,9 +1,6 @@
-import { Button, Space } from 'antd'
-import type { ColumnsType } from 'antd/es/table';
-import { mock, Random } from 'mockjs';
+import { Button } from 'antd'
 import { PageContainer, Table } from '@bixi-design/core';
 import { PlusOutlined } from '@bixi-design/icons';
-import EditDialog from './components/edit-dialog';
 import { useEditDialog } from './hooks/useEditDialog';
 import { useState, useEffect } from 'react';
 import { categoryService } from '@/services/category';
@@ -11,14 +8,14 @@ import { useColumns } from './hooks/useTableData';
 import { TCategoryData } from '@/modal';
 import { useBreadcrumb } from './hooks/useBreadcrumb';
 
-function useCategoryList(id = '') {
+function useCategoryList(categoryId) {
   const [categoryList, setCategoryList] = useState<TCategoryData[]>([]);
 
   useEffect(() => {
-    categoryService.getCategoryById(id).then((category) => {
+    categoryService.getCategoryById(categoryId).then((category) => {
       setCategoryList(category)
     });
-  }, [id])
+  }, [categoryId])
 
   return { categoryList }
 }
@@ -36,7 +33,6 @@ export default function MenuList() {
 
   // 列表数据
   const { categoryList } = useCategoryList(categoryId);
-
 
   function onAdd() {
     console.log(1);

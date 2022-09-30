@@ -25,7 +25,15 @@ export class Category {
           pId: '1',
           name: '南通',
           desc: '很好',
-          children: [],
+          children: [
+            {
+              id: '1-1-1',
+              pId: '1-1',
+              name: '通州',
+              desc: '人杰地灵',
+              children: [],
+            }
+          ],
         },
         {
           id: '1-2',

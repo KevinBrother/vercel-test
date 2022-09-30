@@ -1,4 +1,4 @@
-import { Category, TCategoryData } from '@/modal';
+import { TCategoryData } from '@/modal';
 import { Breadcrumb } from 'antd'
 import React, { useState } from 'react'
 import { useImmer } from 'use-immer';
@@ -14,8 +14,7 @@ export function useBreadcrumb({ setCategoryId }) {
   }
 
   function handleClick(category: TCategoryData, index: number) {
-    console.log('%c [ category ]-17', 'font-size:13px; background:pink; color:#bf2c9f;', category)
-    setCategoryId(category.id);
+    setCategoryId(category.pId);
 
     setBreadCrumbs(draft => {
       draft.splice(index);
