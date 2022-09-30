@@ -10,6 +10,10 @@ export interface IData {
     createTime: Date; */
 }
 
+// 遍历整棵树
+// 查找到某个节点
+// -- 查找某个节点的所有子节点
+// -- 给某个节点添加子节点
 
 export class Category {
   flatData = [];

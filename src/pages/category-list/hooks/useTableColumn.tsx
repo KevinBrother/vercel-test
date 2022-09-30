@@ -2,7 +2,8 @@
 import type { ColumnsType } from 'antd/es/table';
 import { Button, Space } from 'antd'
 import { IfElse } from '@bixi-design/core';
-import { Category, TCategoryData } from '@/modal';
+import { TCategoryData } from '@/modal';
+
 interface DataType {
   key: string;
   name: string;
@@ -19,9 +20,9 @@ export function useColumns({ setIsEditDialogOpen, setCategoryId, addBreadCrumb }
       key: 'name',
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'desc',
+      dataIndex: 'desc',
+      key: 'desc',
     },
     {
       title: 'Action',
