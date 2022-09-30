@@ -8,9 +8,11 @@ import { useEditDialog } from './hooks/useEditDialog';
 import { useState, useEffect } from 'react';
 import { categoryService } from '@/services/category';
 import { useColumns } from './hooks/useTableData';
+import { TCategoryData } from '@/modal';
+import { useBreadcrumb } from './hooks/useBreadcrumb';
 
 function useCategoryList(id = '') {
-  const [categoryList, setCategoryList] = useState([]);
+  const [categoryList, setCategoryList] = useState<TCategoryData[]>([]);
 
   useEffect(() => {
     categoryService.getCategoryById(id).then((category) => {
@@ -19,16 +21,22 @@ function useCategoryList(id = '') {
   }, [id])
 
   return { categoryList }
-
 }
 
 export default function MenuList() {
   const [categoryId, setCategoryId] = useState('');
-
+  // 弹框
   const { render: editDialogRender, setIsModalOpen: setIsEditDialogOpen } = useEditDialog();
-  const { columns } = useColumns({ setIsEditDialogOpen, setCategoryId });
 
+  // 面包屑
+  const { render: breadcrumbRender, addBreadCrumb } = useBreadcrumb({ setCategoryId });
+
+  // 列定义
+  const { columns } = useColumns({ setIsEditDialogOpen, setCategoryId, addBreadCrumb });
+
+  // 列表数据
   const { categoryList } = useCategoryList(categoryId);
+
 
   function onAdd() {
     console.log(1);
@@ -36,9 +44,13 @@ export default function MenuList() {
 
   return (
     <PageContainer>
-      <Button icon={<PlusOutlined />} type='primary' style={{ marginBottom: '16px' }} onClick={onAdd}>
-        创建场景
-      </Button>
+      <div className='mb-6 flex justify-between'>
+
+        {breadcrumbRender}
+        <Button icon={<PlusOutlined />} type='primary' onClick={onAdd}>
+          创建场景
+        </Button>
+      </div>
       <Table striped={true} columns={columns} dataSource={categoryList} rowKey='id' />
       {editDialogRender}
     </PageContainer>

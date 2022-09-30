@@ -2,6 +2,7 @@
 import type { ColumnsType } from 'antd/es/table';
 import { Button, Space } from 'antd'
 import { IfElse } from '@bixi-design/core';
+import { Category, TCategoryData } from '@/modal';
 interface DataType {
   key: string;
   name: string;
@@ -10,8 +11,8 @@ interface DataType {
   tags: string[];
 }
 
-export function useColumns({ setIsEditDialogOpen, setCategoryId }) {
-  const columns: ColumnsType<DataType> = [
+export function useColumns({ setIsEditDialogOpen, setCategoryId, addBreadCrumb }) {
+  const columns: ColumnsType<TCategoryData[]> = [
     {
       title: 'Name',
       dataIndex: 'name',
@@ -27,7 +28,7 @@ export function useColumns({ setIsEditDialogOpen, setCategoryId }) {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <IfElse if={record.children.length > 0}>
+          <IfElse if={record?.children.length > 0}>
             <Button onClick={() => toNext(record)}>下层菜单</Button>
           </IfElse>
           <Button onClick={() => handleClick(record)}>编辑</Button>
@@ -39,6 +40,7 @@ export function useColumns({ setIsEditDialogOpen, setCategoryId }) {
 
   function toNext(record) {
     setCategoryId(record.id);
+    addBreadCrumb(record)
   }
 
   function handleClick(record) {

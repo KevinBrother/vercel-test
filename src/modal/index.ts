@@ -1,5 +1,4 @@
 import { flatData } from "@/utils";
-import { isArray } from "lodash-es";
 
 export interface IData {
   id: string;
@@ -11,9 +10,10 @@ export interface IData {
     createTime: Date; */
 }
 
+
 export class Category {
   flatData = [];
-  category = [
+  data = [
     {
       id: '1',
       pId: '',
@@ -62,7 +62,7 @@ export class Category {
 
   constructor() {
     // TODO 2022年9月30日 22:05:07 转为树的方式查找效率会更高
-    const data = flatData(this.category);
+    const data = flatData(this.data);
     console.log('%c [ data ]-66', 'font-size:13px; background:pink; color:#bf2c9f;', data)
     this.flatData = data;
   }
@@ -70,5 +70,6 @@ export class Category {
   getCategoryById(id) {
     return this.flatData.filter(c => c.pId === id) || [];
   }
-}
+};
 
+export type TCategoryData = Category['data'][0];
