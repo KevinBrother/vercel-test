@@ -1,24 +1,8 @@
 import { Button } from 'antd'
+import { useState } from 'react';
 import { PageContainer, Table } from '@bixi-design/core';
 import { PlusOutlined } from '@bixi-design/icons';
-import { useEditDialog } from './hooks/useEditDialog';
-import { useState, useEffect } from 'react';
-import { categoryService } from '@/services/category';
-import { useColumns } from './hooks/useTableData';
-import { TCategoryData } from '@/modal';
-import { useBreadcrumb } from './hooks/useBreadcrumb';
-
-function useCategoryList(categoryId) {
-  const [categoryList, setCategoryList] = useState<TCategoryData[]>([]);
-
-  useEffect(() => {
-    categoryService.getCategoryById(categoryId).then((category) => {
-      setCategoryList(category)
-    });
-  }, [categoryId])
-
-  return { categoryList }
-}
+import { useColumns, useBreadcrumb, useCategoryList, useEditDialog } from './hooks';
 
 export default function MenuList() {
   const [categoryId, setCategoryId] = useState('');
@@ -35,7 +19,7 @@ export default function MenuList() {
   const { categoryList } = useCategoryList(categoryId);
 
   function onAdd() {
-    console.log(1);
+    setIsEditDialogOpen(true);
   }
 
   return (
@@ -44,7 +28,7 @@ export default function MenuList() {
 
         {breadcrumbRender}
         <Button icon={<PlusOutlined />} type='primary' onClick={onAdd}>
-          创建场景
+          创建类目
         </Button>
       </div>
       <Table striped={true} columns={columns} dataSource={categoryList} rowKey='id' />
