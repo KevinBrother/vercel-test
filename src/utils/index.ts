@@ -7,6 +7,7 @@ export function flatData(list = []) {
     if (isArray(item.children) && item.children.length > 0) {
       result.push(...flatData(item.children));
     }
+    // item.children = [];
     result.push(item);
   })
 

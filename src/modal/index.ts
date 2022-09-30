@@ -62,7 +62,9 @@ export class Category {
 
   constructor() {
     // TODO 2022年9月30日 22:05:07 转为树的方式查找效率会更高
-    this.flatData = flatData(this.category);
+    const data = flatData(this.category);
+    console.log('%c [ data ]-66', 'font-size:13px; background:pink; color:#bf2c9f;', data)
+    this.flatData = data;
   }
 
   getCategoryById(id) {
