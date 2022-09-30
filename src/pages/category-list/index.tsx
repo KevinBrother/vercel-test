@@ -5,6 +5,8 @@ import { PageContainer, Table } from '@bixi-design/core';
 import { PlusOutlined } from '@bixi-design/icons';
 import EditDialog from './components/edit-dialog';
 import { useEditDialog } from './hooks/edit-dialog';
+import { useState, useEffect } from 'react';
+import { categoryService } from '@/services/category';
 
 interface DataType {
   key: string;
@@ -14,7 +16,7 @@ interface DataType {
   tags: string[];
 }
 
-var mockData = mock({
+/* var mockData = mock({
   "list|1-10": [
     {
       key: '@increment(1)',
@@ -24,8 +26,20 @@ var mockData = mock({
       "add_time": "@date(yyyy-MM-dd hh:mm:ss)",
     }
   ]
-})
+}) */
 
+function useCategoryList(id = '') {
+  const [categoryList, setCategoryList] = useState([]);
+
+  useEffect(() => {
+    categoryService.getCategoryById(id).then((category) => {
+      setCategoryList(category)
+    });
+  }, [id])
+
+  return { categoryList }
+
+}
 
 export default function MenuList() {
 
@@ -55,6 +69,8 @@ export default function MenuList() {
     },
   ]
 
+  const { categoryList } = useCategoryList();
+
   function onAdd() {
     console.log(1);
   }
@@ -69,7 +85,7 @@ export default function MenuList() {
       <Button icon={<PlusOutlined />} type='primary' style={{ marginBottom: '16px' }} onClick={onAdd}>
         创建场景
       </Button>
-      <Table striped={true} columns={columns} dataSource={mockData.list} />
+      <Table striped={true} columns={columns} dataSource={categoryList} />
       {editDialogRender}
     </PageContainer>
   )
