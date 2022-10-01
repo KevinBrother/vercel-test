@@ -23,10 +23,8 @@ export function useEditDialog({ categoryId }) {
   };
 
   const onFinish = (form: FormInstance) => {
-    console.log('Success:', form);
     form.validateFields().then(rst => {
-      console.log('[ rst ] >', rst);
-      categoryService.addCategoryById(values, categoryId)
+      categoryService.addCategoryById(form.getFieldsValue(), categoryId)
     }).catch(err => {
       console.log('[ err ] >', err)
     })

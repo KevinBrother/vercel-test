@@ -12,7 +12,7 @@ export const categoryService = {
 
   addCategoryById(category: ICategory, id: string) {
     return new Promise<Boolean>((resolve, reject) => {
-      resolve(category.addCategoryById(category, id));
+      resolve(categoryStore.addCategoryById(category, id));
     })
   }
 }

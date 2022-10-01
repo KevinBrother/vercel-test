@@ -91,10 +91,11 @@ class Category {
   }
 
   addCategoryById(category: ICategory, id: string) {
-    const pCategory = flattenedData.find(c => c.pId === id);
+    const pCategory = this.categoryList.find(c => c.pId === id);
     if (!pCategory) {
       return false;
     }
+    console.log('%c [ category ]-94', 'font-size:13px; background:pink; color:#bf2c9f;', category)
 
     pCategory.children.push(category);
     return true;
