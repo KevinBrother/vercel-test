@@ -1,14 +1,19 @@
 import { categoryService } from '@/services/category';
 import { Button, Modal, Checkbox, Form, Input } from 'antd';
 import { FormInstance } from 'antd/es/form/Form';
+import { v4 } from 'uuid'
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
-export function useEditDialog({ categoryId }) {
-  console.log('%c [ categoryId ]-6', 'font-size:13px; background:pink; color:#bf2c9f;', categoryId)
+export function useEditDialog({ categoryId, getCategoryById }) {
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
-  // form.setFieldValue('pId', categoryId);
-  // form.setFieldsValue('pId', categoryId);
+
+  useEffect(() => {
+    console.log('changes......')
+  }, [categoryId, isModalOpen])
+
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -25,6 +30,8 @@ export function useEditDialog({ categoryId }) {
   const onFinish = (form: FormInstance) => {
     form.validateFields().then(rst => {
       categoryService.addCategoryById(form.getFieldsValue(), categoryId)
+      getCategoryById(categoryId);
+      handleCancel();
     }).catch(err => {
       console.log('[ err ] >', err)
     })
@@ -41,19 +48,10 @@ export function useEditDialog({ categoryId }) {
         form={form}
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 18 }}
-        initialValues={{ pId: categoryId }}
+        initialValues={{ pId: categoryId, id: v4(), children: [] }}
         autoComplete="off"
       >
         <Form.Item
-          // hidden={true}
-          label="pId"
-          name="pId"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-
           label="name"
           name="name"
           rules={[{ required: true, message: 'Please input your name!' }]}
@@ -67,6 +65,28 @@ export function useEditDialog({ categoryId }) {
         >
           <Input />
         </Form.Item>
+
+        <Form.Item
+          hidden={true}
+          label="id"
+          name="id"
+          rules={[{ required: true }]}
+        >
+        </Form.Item>
+        <Form.Item
+          hidden={true}
+          label="pId"
+          name="pId"
+        >
+        </Form.Item>
+
+        <Form.Item
+          hidden={true}
+          label="children"
+          name="children"
+        >
+        </Form.Item>
+
       </Form>
     </Modal>
   );

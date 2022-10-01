@@ -2,21 +2,23 @@ import { Button } from 'antd'
 import { useState } from 'react';
 import { PageContainer, Table } from '@bixi-design/core';
 import { PlusOutlined } from '@bixi-design/icons';
+import { observer } from 'mobx-react';
 import { useColumns, useBreadcrumb, useCategoryList, useEditDialog } from './hooks';
 
-export default function MenuList() {
+export default observer(function MenuList() {
   const [categoryId, setCategoryId] = useState('');
+
+  // 列表数据
+  const { categoryList, getCategoryById } = useCategoryList(categoryId);
+
   // 弹框
-  const { render: editDialogRender, setIsModalOpen: setIsEditDialogOpen } = useEditDialog({ categoryId });
+  const { render: editDialogRender, setIsModalOpen: setIsEditDialogOpen } = useEditDialog({ categoryId, getCategoryById });
 
   // 面包屑
   const { render: breadcrumbRender, addBreadCrumb } = useBreadcrumb({ setCategoryId });
 
   // 列定义
   const { columns } = useColumns({ setIsEditDialogOpen, setCategoryId, addBreadCrumb });
-
-  // 列表数据
-  const { categoryList } = useCategoryList(categoryId);
 
   function onAdd() {
     setIsEditDialogOpen(true);
@@ -35,4 +37,4 @@ export default function MenuList() {
       {editDialogRender}
     </PageContainer>
   )
-}
+}) 

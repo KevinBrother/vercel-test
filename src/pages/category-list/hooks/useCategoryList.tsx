@@ -1,15 +1,22 @@
 import { useState, useEffect } from 'react';
 import { categoryService } from '@/services/category';
-import { ICategory } from '@/stores';
+import { useRequest } from 'ahooks';
 
 export function useCategoryList(categoryId) {
   const [categoryList, setCategoryList] = useState<ICategory[]>([]);
 
-  useEffect(() => {
-    categoryService.getCategoryById(categoryId).then((category) => {
+  const { data, run: getCategoryById } = useRequest(() => categoryService.getCategoryById(categoryId), {
+    onSuccess(category) {
       setCategoryList(category)
-    });
-  }, [categoryId])
+    },
+    refreshDeps: [categoryId]
+  });
 
-  return { categoryList }
+  /*  useEffect(() => {
+     categoryService.getCategoryById(categoryId).then((category) => {
+       setCategoryList(category)
+     });
+   }, [categoryId]) */
+
+  return { categoryList, getCategoryById }
 }
