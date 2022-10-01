@@ -29,8 +29,14 @@ const NumberMobxTest = observer(function NumberMobxTest() {
 export default observer(function MobxDemo() {
   const [users, setUsers] = useState<any[]>([])
 
-  function handleClick() {
-    testStoreService.getUser().then((users) => {
+  function handleSelf(id: string) {
+    testStoreService.getUser(id).then((users) => {
+      setUsers(users);
+    })
+  }
+
+  function handleChildren(id: string) {
+    testStoreService.getChildren(id).then((users) => {
       setUsers(users);
     })
   }
@@ -44,6 +50,8 @@ export default observer(function MobxDemo() {
             <div key={index}>
               {item.id}: {item.name}
               <button onClick={() => testStore.getUser(item.id)}>add</button>
+              <button onClick={() => handleSelf(item.id)}> 通过service获取自己。。。 </button>
+              <button onClick={() => handleChildren(item.id)}> 通过service获取自己的儿子们 </button>
             </div>
         )}
         // id为1的有
@@ -54,11 +62,11 @@ export default observer(function MobxDemo() {
             </div>
         )}
 
-        <button onClick={handleClick}> 通过service获取 </button>
         {users.map(
           (item, index) =>
             <div key={index}>
               {item.name}
+              <button onClick={() => handleChildren(item.id)}> 通过service获取自己的儿子们 </button>
             </div>
         )}
       </div>

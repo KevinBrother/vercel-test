@@ -74,60 +74,7 @@ const flattenedData = flatData(categoryData);
 
 class Category {
   // TODO 2022年9月30日 22:05:07 转为树的方式查找效率会更高
-  categoryList = [
-    {
-      id: '1',
-      pId: '',
-      name: '江苏',
-      desc: '不错',
-      children: [
-        {
-          id: '1-1',
-          pId: '1',
-          name: '南通',
-          desc: '很好',
-          children: [
-            {
-              id: '1-1-1',
-              pId: '1-1',
-              name: '通州',
-              desc: '人杰地灵',
-              children: [],
-            }
-          ],
-        },
-        {
-          id: '1-2',
-          pId: '1',
-          name: '南京',
-          desc: '不错呀',
-          children: [],
-        }
-      ],
-    },
-    {
-      id: '2',
-      pId: '',
-      name: '浙江',
-      desc: '不错',
-      children: [
-        {
-          id: '2-1',
-          pId: '2',
-          name: '杭州',
-          desc: '很好',
-          children: [],
-        },
-        {
-          id: '2-2',
-          pId: '2',
-          name: '萧山',
-          desc: '不错呀',
-          children: [],
-        }
-      ],
-    }
-  ]
+  categoryList = flattenedData;
 
   constructor() {
     makeAutoObservable(this);

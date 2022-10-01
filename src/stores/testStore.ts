@@ -1,22 +1,42 @@
+import { flatData } from '@/utils';
 import { makeAutoObservable } from 'mobx'
+
+const userData = [
+  {
+    pId: '',
+    id: '1',
+    name: 'John',
+    children: [
+      {
+        pId: '1',
+        id: '3',
+        name: 'Essen',
+        children: [
+          {
+            pId: '3',
+            id: '4',
+            name: 'Essen-child',
+            children: []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    pId: '',
+    id: '2',
+    name: 'Mack',
+    children: []
+  }
+];
+
+const flattenedData = flatData(userData);
+console.log('%c [ flattenedData ]-27', 'font-size:13px; background:pink; color:#bf2c9f;', flattenedData)
 
 
 class TestStore {
   arr = [1];
-  users = [
-    {
-      id: '1',
-      name: 'John',
-    },
-    {
-      id: '1',
-      name: 'Mack',
-    },
-    {
-      id: '2',
-      name: 'Essen',
-    }
-  ];
+  users = flattenedData;
 
   constructor() {
     makeAutoObservable(this);
@@ -36,14 +56,25 @@ class TestStore {
     return users;
   }
 
+  getChildren(id: string) {
+    const users = this.users.filter(item => item.pId === id);
+    return users;
+  }
 }
 
 export const testStore = new TestStore();
 
 export const testStoreService = {
-  getUser() {
+  getUser(id: string) {
     return new Promise((resolve, reject) => {
-      const users = testStore.getUser('1');
+      const users = testStore.getUser(id);
+      resolve(users)
+    })
+  },
+
+  getChildren(id: string) {
+    return new Promise((resolve, reject) => {
+      const users = testStore.getChildren(id);
       resolve(users)
     })
   }
