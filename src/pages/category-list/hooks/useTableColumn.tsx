@@ -2,7 +2,7 @@
 import type { ColumnsType } from 'antd/es/table';
 import { Button, Space } from 'antd'
 import { IfElse } from '@bixi-design/core';
-import { TCategoryData } from '@/modal';
+import { ICategory } from '@/stores';
 
 interface DataType {
   key: string;
@@ -13,7 +13,7 @@ interface DataType {
 }
 
 export function useColumns({ setIsEditDialogOpen, setCategoryId, addBreadCrumb }) {
-  const columns: ColumnsType<TCategoryData[]> = [
+  const columns: ColumnsType<ICategory[]> = [
     {
       title: 'Name',
       dataIndex: 'name',

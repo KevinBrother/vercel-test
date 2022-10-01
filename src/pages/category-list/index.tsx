@@ -7,7 +7,7 @@ import { useColumns, useBreadcrumb, useCategoryList, useEditDialog } from './hoo
 export default function MenuList() {
   const [categoryId, setCategoryId] = useState('');
   // 弹框
-  const { render: editDialogRender, setIsModalOpen: setIsEditDialogOpen } = useEditDialog();
+  const { render: editDialogRender, setIsModalOpen: setIsEditDialogOpen } = useEditDialog({ categoryId });
 
   // 面包屑
   const { render: breadcrumbRender, addBreadCrumb } = useBreadcrumb({ setCategoryId });

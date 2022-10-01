@@ -1,17 +1,17 @@
-import { TCategoryData } from '@/modal';
+import { ICategory } from '@/stores';
 import { Breadcrumb } from 'antd'
 import { useImmer } from 'use-immer';
 
 export function useBreadcrumb({ setCategoryId }) {
-  const [breadCrumbs, setBreadCrumbs] = useImmer<TCategoryData[]>([]);
+  const [breadCrumbs, setBreadCrumbs] = useImmer<ICategory[]>([]);
 
-  function addBreadCrumb(category: TCategoryData) {
+  function addBreadCrumb(category: ICategory) {
     setBreadCrumbs(draft => {
       draft.push(category);
     })
   }
 
-  function handleClick(category: TCategoryData, index: number) {
+  function handleClick(category: ICategory, index: number) {
     setCategoryId(category.pId);
 
     setBreadCrumbs(draft => {

@@ -7,6 +7,8 @@ const CategoryList = loadable(() => import('@/pages/category-list'));
 // Demo
 const RpaListDemo = loadable(() => import('@/pages/demo/rpa-list-demo'));
 const RpaMenuDemo = loadable(() => import('@/pages/demo/rpa-menu-demo'));
+const RpaMeTnuDemo = loadable(() => import('@/pages/demo/rpa-menu-demo'));
+const MobxDemo = loadable(() => import('@/pages/demo/mobx-demo'));
 
 export const MenuRouter = [
   {
@@ -16,6 +18,10 @@ export const MenuRouter = [
   {
     path: "rpa-list-demo", // TODO 做demo的子路由
     element: <RpaListDemo />,
+  },
+  {
+    path: "mobx-demo", // TODO 做demo的子路由
+    element: <MobxDemo />,
   },
   {
     path: "RpaMenuDemo",
