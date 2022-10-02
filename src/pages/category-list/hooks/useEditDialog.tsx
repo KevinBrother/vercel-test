@@ -7,12 +7,44 @@ import { useEffect } from 'react';
 import { EFlag } from '..';
 import { useRequest } from 'ahooks';
 
-export function useEditDialog({ runGetCategoryById, category, flag, refreshGetCategoryById }) {
+/* export function useEditDialog({ runGetCategoryById, category, flag, refreshGetCategoryById }) {
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+
+
+  return { isEditDialogOpen, setIsEditDialogOpen, onFinish, form }
+}; */
+
+export function EditDialog({ breadCrumbCategory, isEditDialogOpen, setIsEditDialogOpen, refreshGetCategoryById, flag }) {
+
+  useEffect(() => {
+    // TODO 包装对象
+    let initialValues = {}
+    if (isEditDialogOpen) {
+      // 编辑和修改不一样！！！
+      if (flag === EFlag.add) {
+        // TODO pId 初始值
+        initialValues.pId = breadCrumbCategory.id || '';
+        initialValues.id = v4();
+        initialValues.children = [];
+        console.log('%c [ initialValues ]-23', 'font-size:13px; background:pink; color:#bf2c9f;', initialValues)
+      } else {
+        initialValues = { ...breadCrumbCategory }
+      }
+      // TODO 2022年10月2日 12:48:41 判断是否有id和pid
+      form.setFieldsValue(initialValues)
+    }
+
+    return () => {
+      form.resetFields()
+    }
+
+  }, [breadCrumbCategory, isEditDialogOpen])
+
+
   const [form] = Form.useForm();
 
-  const { run: runAddCategoryById } = useRequest(() => categoryService.addCategoryById(form.getFieldsValue(), category.id), {
+  const { run: runAddCategoryById } = useRequest(() => categoryService.addCategoryById(form.getFieldsValue(), breadCrumbCategory.id), {
     manual: true,
     onSuccess() {
       // runGetCategoryById(category.id);
@@ -29,32 +61,8 @@ export function useEditDialog({ runGetCategoryById, category, flag, refreshGetCa
     }
   });
 
-  useEffect(() => {
-    // TODO 包装对象
-    let initialValues = {}
-    if (isModalOpen) {
-      // 编辑和修改不一样！！！
-      if (flag === EFlag.add) {
-        // TODO pId 初始值
-        initialValues.pId = category.id || '';
-        initialValues.id = v4();
-        initialValues.children = [];
-        console.log('%c [ initialValues ]-23', 'font-size:13px; background:pink; color:#bf2c9f;', initialValues)
-      } else {
-        initialValues = { ...category }
-      }
-      // TODO 2022年10月2日 12:48:41 判断是否有id和pid
-      form.setFieldsValue(initialValues)
-    }
-
-    return () => {
-      form.resetFields()
-    }
-
-  }, [category, isModalOpen])
-
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setIsEditDialogOpen(false);
   };
 
   const onFinish = (form: FormInstance) => {
@@ -69,12 +77,12 @@ export function useEditDialog({ runGetCategoryById, category, flag, refreshGetCa
     })
   };
 
-  const render = (
+  return (
     <Modal
       title="创建/编辑类目"
-      open={isModalOpen}
+      open={isEditDialogOpen}
       onOk={() => onFinish(form)}
-      onCancel={handleCancel}
+      onCancel={() => setIsEditDialogOpen(false)}
       getContainer={false}>
       <Form
         form={form}
@@ -120,7 +128,5 @@ export function useEditDialog({ runGetCategoryById, category, flag, refreshGetCa
 
       </Form>
     </Modal>
-  );
-
-  return { render, setIsModalOpen }
-};
+  )
+}

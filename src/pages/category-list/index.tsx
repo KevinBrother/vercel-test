@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { PageContainer, Table } from '@bixi-design/core';
 import { PlusOutlined } from '@bixi-design/icons';
 import { observer } from 'mobx-react';
-import { useColumns, useBreadcrumb, useCategoryList, useEditDialog } from './hooks';
+import { getColumns, useBreadcrumb, useCategoryList, CategoryBreadcrumb, EditDialog } from './hooks';
+import { cloneDeep } from 'lodash-es';
 
 export enum EFlag {
   add = 'ADD',
@@ -11,21 +12,30 @@ export enum EFlag {
 }
 
 export default observer(function MenuList() {
-  const [categoryId, setCategoryId] = useState('');
-  const [category, setCategory] = useState<ICategory>({});
+  const [breadCrumbCategory, setCurrentBreadCrumbCategory] = useState<ICategory>({});
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+
+  const [breadCrumbs, setBreadCrumbs] = useState<ICategory[]>([]);
+
+  function addBreadCrumb(category: ICategory) {
+    const _breadCrumbs = cloneDeep(breadCrumbs);
+    _breadCrumbs.push(category);
+    setBreadCrumbs(_breadCrumbs);
+  }
+
   const [flag, setFlag] = useState(EFlag.add);
   // TODO 2022年10月2日 12:30:53 纯hooks换成组件+hooks看看效果会不会更好
   // 列表数据
-  const { categoryList, runGetCategoryById, refreshGetCategoryById } = useCategoryList(categoryId);
-
-  // 弹框
-  const { render: editDialogRender, setIsModalOpen: setIsEditDialogOpen } = useEditDialog({ runGetCategoryById, category, flag, refreshGetCategoryById });
+  const { categoryList, runGetCategoryById, refreshGetCategoryById } = useCategoryList({ breadCrumbCategory });
 
   // 面包屑
-  const { render: breadcrumbRender, addBreadCrumb } = useBreadcrumb({ setCategoryId, setCategory });
+  // const { breadCrumbs, addBreadCrumb, chooseBreadCrumb } = useBreadcrumb({ setCurrentBreadCrumbCategory });
+
+  // 弹框
+  // const { isEditDialogOpen, setIsEditDialogOpen, onFinish, form } = useEditDialog({ runGetCategoryById, breadCrumbCategory, flag, refreshGetCategoryById });
 
   // 列定义
-  const { columns } = useColumns({ setIsEditDialogOpen, setCategoryId, addBreadCrumb, setCategory, setFlag });
+  const { columns } = getColumns({ setIsEditDialogOpen, addBreadCrumb, setCurrentBreadCrumbCategory, setFlag });
 
   function onAdd() {
     setIsEditDialogOpen(true);
@@ -35,14 +45,24 @@ export default observer(function MenuList() {
   return (
     <PageContainer>
       <div className='mb-6 flex justify-between'>
-
-        {breadcrumbRender}
+        <CategoryBreadcrumb
+          breadCrumbs={breadCrumbs}
+          setBreadCrumbs={setBreadCrumbs}
+          setCurrentBreadCrumbCategory={setCurrentBreadCrumbCategory}
+        />
         <Button icon={<PlusOutlined />} type='primary' onClick={onAdd}>
           创建类目
         </Button>
       </div>
       <Table striped={true} columns={columns} dataSource={categoryList} rowKey='id' />
-      {editDialogRender}
+      <EditDialog
+        breadCrumbCategory={breadCrumbCategory}
+        isEditDialogOpen={isEditDialogOpen}
+        setIsEditDialogOpen={setIsEditDialogOpen}
+        refreshGetCategoryById={refreshGetCategoryById}
+        flag={flag}
+      />
+
     </PageContainer>
   )
 }) 

@@ -3,18 +3,18 @@ import React, { useState } from 'react';
 
 const EditDialog: React.FC = () => {
   console.log('[ 111 ] >', 111)
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
   const showModal = () => {
-    setIsModalOpen(true);
+    setIsEditDialogOpen(true);
   };
 
   const handleOk = () => {
-    setIsModalOpen(false);
+    setIsEditDialogOpen(false);
   };
 
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setIsEditDialogOpen(false);
   };
 
   const onFinish = (values: any) => {
@@ -28,7 +28,7 @@ const EditDialog: React.FC = () => {
 
   return (
     <>
-      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Basic Modal" open={isEditDialogOpen} onOk={handleOk} onCancel={handleCancel}>
         <Form
           name="basic"
           labelCol={{ span: 8 }}

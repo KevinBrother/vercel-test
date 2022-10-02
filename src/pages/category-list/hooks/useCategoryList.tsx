@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import { categoryService } from '@/services/category';
 import { useRequest } from 'ahooks';
 
-export function useCategoryList(categoryId) {
+export function useCategoryList({ breadCrumbCategory }) {
   const [categoryList, setCategoryList] = useState<ICategory[]>([]);
 
-  const { data, run: runGetCategoryById, refresh: refreshGetCategoryById } = useRequest(() => categoryService.getCategoryById(categoryId), {
-    onSuccess(category) {
-      console.log('%c [ category ]-10', 'font-size:13px; background:pink; color:#bf2c9f;', category)
-      setCategoryList(category)
+  const { run: runGetCategoryById, refresh: refreshGetCategoryById } = useRequest(() => categoryService.getCategoryById(breadCrumbCategory.id), {
+    onSuccess(categoryList) {
+      console.log('%c [ categoryList ]-10', 'font-size:13px; background:pink; color:#bf2c9f;', categoryList)
+      setCategoryList(categoryList)
     },
-    refreshDeps: [categoryId]
+    refreshDeps: [breadCrumbCategory]
   });
 
   /*  useEffect(() => {

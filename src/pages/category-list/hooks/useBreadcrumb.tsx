@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash-es';
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 
-export function useBreadcrumb({ setCategoryId, setCategory }) {
+export function useBreadcrumb() {
   /* 
     // TODO 2022年10月1日 18:37:25 为什么用immer会报mobx的错？？
     const [breadCrumbs, setBreadCrumbs] = useImmer<ICategory[]>([]);
@@ -29,28 +29,40 @@ export function useBreadcrumb({ setCategoryId, setCategory }) {
     setBreadCrumbs(_breadCrumbs);
   }
 
-  function handleClick(category: ICategory, index: number) {
+
+  return { breadCrumbs, addBreadCrumb }
+}
+
+export function CategoryBreadcrumb({ breadCrumbs, setCurrentBreadCrumbCategory, setBreadCrumbs }) {
+
+  function chooseBreadCrumb(category: ICategory, index: number) {
     const _breadCrumbs = cloneDeep(breadCrumbs);
     _breadCrumbs.splice(index);
 
     if (_breadCrumbs.length === 0) {
-      setCategory({})
+      setCurrentBreadCrumbCategory({})
+    } else {
+      setCurrentBreadCrumbCategory(category)
     }
-    setCategoryId(category.pId);
     setBreadCrumbs(_breadCrumbs);
   }
 
-  const render = (
+  function chooseHome() {
+    // TODO 2022年10月3日 00:42:48 初始值需要定义
+    setCurrentBreadCrumbCategory({})
+    setBreadCrumbs([])
+  }
+
+  return (
     <Breadcrumb>
+      <Breadcrumb.Item className='cursor-pointer' onClick={chooseHome} >HOME</Breadcrumb.Item>
       {
         breadCrumbs.map((item, index) => {
           return (
-            <Breadcrumb.Item className='cursor-pointer' key={index} onClick={() => handleClick(item, index)}>{item.name}</Breadcrumb.Item>
+            <Breadcrumb.Item className='cursor-pointer' key={index} onClick={() => chooseBreadCrumb(item, index)}>{item.name}</Breadcrumb.Item>
           )
         })
       }
     </Breadcrumb>
   )
-
-  return { render, addBreadCrumb }
 }
