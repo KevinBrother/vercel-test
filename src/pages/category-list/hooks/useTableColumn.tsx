@@ -3,6 +3,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { Button, Space } from 'antd'
 import { IfElse } from '@bixi-design/core';
 import { ICategory } from '@/stores';
+import { EFlag } from '..';
 
 interface DataType {
   key: string;
@@ -12,7 +13,7 @@ interface DataType {
   tags: string[];
 }
 
-export function useColumns({ setIsEditDialogOpen, setCategoryId, addBreadCrumb }) {
+export function useColumns({ setIsEditDialogOpen, setCategoryId, addBreadCrumb, setCategory, setFlag }) {
   const columns: ColumnsType<ICategory[]> = [
     {
       title: 'Name',
@@ -32,7 +33,7 @@ export function useColumns({ setIsEditDialogOpen, setCategoryId, addBreadCrumb }
           <IfElse if={record?.children.length > 0}>
             <Button onClick={() => toNext(record)}>下层菜单</Button>
           </IfElse>
-          <Button onClick={() => handleClick(record)}>编辑</Button>
+          <Button onClick={() => edit(record)}>编辑</Button>
           <Button onClick={() => handleClick(record)}>删除</Button>
         </Space>
       ),
@@ -40,8 +41,16 @@ export function useColumns({ setIsEditDialogOpen, setCategoryId, addBreadCrumb }
   ]
 
   function toNext(record) {
+
     setCategoryId(record.id);
+    setCategory(record);
     addBreadCrumb(record)
+  }
+
+  function edit(record) {
+    setFlag(EFlag.edit)
+    setCategory(record)
+    setIsEditDialogOpen(true);
   }
 
   function handleClick(record) {

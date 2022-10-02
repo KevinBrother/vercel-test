@@ -4,24 +4,54 @@ import { FormInstance } from 'antd/es/form/Form';
 import { v4 } from 'uuid'
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { EFlag } from '..';
+import { useRequest } from 'ahooks';
 
-export function useEditDialog({ categoryId, getCategoryById }) {
+export function useEditDialog({ runGetCategoryById, category, flag, refreshGetCategoryById }) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
 
+  const { run: runAddCategoryById } = useRequest(() => categoryService.addCategoryById(form.getFieldsValue(), category.id), {
+    manual: true,
+    onSuccess() {
+      // runGetCategoryById(category.id);
+      refreshGetCategoryById();
+      handleCancel();
+    }
+  });
+
+  const { run: runEditCategoryById } = useRequest(() => categoryService.editCategory(form.getFieldsValue()), {
+    manual: true,
+    onSuccess() {
+      refreshGetCategoryById();
+      handleCancel();
+    }
+  });
+
   useEffect(() => {
-    console.log('changes......')
-  }, [categoryId, isModalOpen])
+    // TODO 包装对象
+    let initialValues = {}
+    if (isModalOpen) {
+      // 编辑和修改不一样！！！
+      if (flag === EFlag.add) {
+        // TODO pId 初始值
+        initialValues.pId = category.id || '';
+        initialValues.id = v4();
+        initialValues.children = [];
+        console.log('%c [ initialValues ]-23', 'font-size:13px; background:pink; color:#bf2c9f;', initialValues)
+      } else {
+        initialValues = { ...category }
+      }
+      // TODO 2022年10月2日 12:48:41 判断是否有id和pid
+      form.setFieldsValue(initialValues)
+    }
 
+    return () => {
+      form.resetFields()
+    }
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+  }, [category, isModalOpen])
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -29,9 +59,11 @@ export function useEditDialog({ categoryId, getCategoryById }) {
 
   const onFinish = (form: FormInstance) => {
     form.validateFields().then(rst => {
-      categoryService.addCategoryById(form.getFieldsValue(), categoryId)
-      getCategoryById(categoryId);
-      handleCancel();
+      if (EFlag.add === flag) {
+        runAddCategoryById()
+      } else {
+        runEditCategoryById()
+      }
     }).catch(err => {
       console.log('[ err ] >', err)
     })
@@ -48,7 +80,6 @@ export function useEditDialog({ categoryId, getCategoryById }) {
         form={form}
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 18 }}
-        initialValues={{ pId: categoryId, id: v4(), children: [] }}
         autoComplete="off"
       >
         <Form.Item
@@ -67,21 +98,21 @@ export function useEditDialog({ categoryId, getCategoryById }) {
         </Form.Item>
 
         <Form.Item
-          hidden={true}
+          // hidden={true}
           label="id"
           name="id"
           rules={[{ required: true }]}
         >
         </Form.Item>
         <Form.Item
-          hidden={true}
+          // hidden={true}
           label="pId"
           name="pId"
         >
         </Form.Item>
 
         <Form.Item
-          hidden={true}
+          // hidden={true}
           label="children"
           name="children"
         >

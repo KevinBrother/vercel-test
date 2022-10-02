@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash-es';
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 
-export function useBreadcrumb({ setCategoryId }) {
+export function useBreadcrumb({ setCategoryId, setCategory }) {
   /* 
     // TODO 2022年10月1日 18:37:25 为什么用immer会报mobx的错？？
     const [breadCrumbs, setBreadCrumbs] = useImmer<ICategory[]>([]);
@@ -21,6 +21,7 @@ export function useBreadcrumb({ setCategoryId }) {
    */
 
   const [breadCrumbs, setBreadCrumbs] = useState<ICategory[]>([]);
+
   function addBreadCrumb(category: ICategory) {
     const _breadCrumbs = cloneDeep(breadCrumbs);
     _breadCrumbs.push(category);
@@ -32,6 +33,9 @@ export function useBreadcrumb({ setCategoryId }) {
     const _breadCrumbs = cloneDeep(breadCrumbs);
     _breadCrumbs.splice(index);
 
+    if (_breadCrumbs.length === 0) {
+      setCategory({})
+    }
     setCategoryId(category.pId);
     setBreadCrumbs(_breadCrumbs);
   }
