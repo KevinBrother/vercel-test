@@ -12,7 +12,13 @@ interface DataType {
   tags: string[];
 }
 
-export function getColumns({ setParentCategory, setIsEditDialogOpen, setFlag, refreshGetCategoryById, setCurrentCategory }) {
+export function getColumns({
+  setParentCategory,
+  setIsEditDialogOpen,
+  setFlag,
+  addBreadCrumb,
+  refreshGetCategoryById,
+  setCurrentCategory }) {
   const columns: ColumnsType<ICategory[]> = [
     {
       title: 'Name',
@@ -29,6 +35,7 @@ export function getColumns({ setParentCategory, setIsEditDialogOpen, setFlag, re
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
+          {/* // TODO 2022年10月3日 01:13:10 可以一直往下掉 */}
           <IfElse if={record?.children.length > 0}>
             <Button onClick={() => toNext(record)}>下层菜单</Button>
           </IfElse>
@@ -41,7 +48,7 @@ export function getColumns({ setParentCategory, setIsEditDialogOpen, setFlag, re
 
   function toNext(record) {
     setParentCategory(record);
-    // addBreadCrumb(record)
+    addBreadCrumb(record)
   }
 
   function edit(record) {

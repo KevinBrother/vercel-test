@@ -16,14 +16,14 @@ export default observer(function MenuList() {
   const [currentCategory, setCurrentCategory] = useState<ICategory>({});
 
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  /* 
-    const [breadCrumbs, setBreadCrumbs] = useState<ICategory[]>([]);
-  
-    function addBreadCrumb(category: ICategory) {
-      const _breadCrumbs = cloneDeep(breadCrumbs);
-      _breadCrumbs.push(category);
-      setBreadCrumbs(_breadCrumbs);
-    } */
+
+  const [breadCrumbs, setBreadCrumbs] = useState<ICategory[]>([]);
+
+  function addBreadCrumb(category: ICategory) {
+    const _breadCrumbs = cloneDeep(breadCrumbs);
+    _breadCrumbs.push(category);
+    setBreadCrumbs(_breadCrumbs);
+  }
 
   const [flag, setFlag] = useState(EFlag.add);
   // TODO 2022年10月2日 12:30:53 纯hooks换成组件+hooks看看效果会不会更好
@@ -31,7 +31,14 @@ export default observer(function MenuList() {
   const { categoryList, runGetCategoryById, refreshGetCategoryById } = useCategoryList({ parentCategory });
 
   // 列定义
-  const { columns } = getColumns({ setIsEditDialogOpen, setParentCategory, setFlag, refreshGetCategoryById, setCurrentCategory });
+  const { columns } = getColumns({
+    setIsEditDialogOpen,
+    setParentCategory,
+    setFlag,
+    refreshGetCategoryById,
+    setCurrentCategory,
+    addBreadCrumb
+  });
 
   function onAdd() {
     setIsEditDialogOpen(true);
@@ -41,11 +48,11 @@ export default observer(function MenuList() {
   return (
     <PageContainer>
       <div className='mb-6 flex justify-between'>
-        {/*  <CategoryBreadcrumb
+        <CategoryBreadcrumb
           breadCrumbs={breadCrumbs}
           setBreadCrumbs={setBreadCrumbs}
           setParentCategory={setParentCategory}
-        /> */}
+        />
         <Button icon={<PlusOutlined />} type='primary' onClick={onAdd}>
           创建类目
         </Button>
