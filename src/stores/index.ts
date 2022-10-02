@@ -12,13 +12,15 @@ class Category {
   }
 
   getCategoryById(id: string) {
-    return this.categoryList.filter(c => c.pId === id) || [];
+    console.log('%c [ id ]-15', 'font-size:13px; background:pink; color:#bf2c9f;', id)
+    // 兼容顶层元素 TODO 2022年10月3日 00:47:56 初始化值需要定义
+    return this.categoryList.filter(c => c.pId === (id || '')) || [];
   }
 
   // 写的不好，不清晰
   addCategoryById(category: ICategory, id: string) {
     const parentCategory = this.categoryList.find(c => c.pId === id);
-    if (!parentCategory && category.pId !== id) {
+    if (!parentCategory && category.pId !== (id || '')) {
       return false;
     }
 

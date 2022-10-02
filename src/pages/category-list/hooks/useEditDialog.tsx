@@ -15,7 +15,14 @@ import { useRequest } from 'ahooks';
   return { isEditDialogOpen, setIsEditDialogOpen, onFinish, form }
 }; */
 
-export function EditDialog({ breadCrumbCategory, isEditDialogOpen, setIsEditDialogOpen, refreshGetCategoryById, flag }) {
+export function EditDialog({
+  currentCategory,
+  parentCategory,
+  isEditDialogOpen,
+  setIsEditDialogOpen,
+  refreshGetCategoryById,
+  flag
+}) {
 
   useEffect(() => {
     // TODO 包装对象
@@ -24,12 +31,12 @@ export function EditDialog({ breadCrumbCategory, isEditDialogOpen, setIsEditDial
       // 编辑和修改不一样！！！
       if (flag === EFlag.add) {
         // TODO pId 初始值
-        initialValues.pId = breadCrumbCategory.id || '';
+        initialValues.pId = parentCategory.id || '';
         initialValues.id = v4();
         initialValues.children = [];
         console.log('%c [ initialValues ]-23', 'font-size:13px; background:pink; color:#bf2c9f;', initialValues)
       } else {
-        initialValues = { ...breadCrumbCategory }
+        initialValues = { ...currentCategory }
       }
       // TODO 2022年10月2日 12:48:41 判断是否有id和pid
       form.setFieldsValue(initialValues)
@@ -39,12 +46,12 @@ export function EditDialog({ breadCrumbCategory, isEditDialogOpen, setIsEditDial
       form.resetFields()
     }
 
-  }, [breadCrumbCategory, isEditDialogOpen])
+  }, [parentCategory, isEditDialogOpen])
 
 
   const [form] = Form.useForm();
 
-  const { run: runAddCategoryById } = useRequest(() => categoryService.addCategoryById(form.getFieldsValue(), breadCrumbCategory.id), {
+  const { run: runAddCategoryById } = useRequest(() => categoryService.addCategoryById(form.getFieldsValue(), parentCategory.id || ''), {
     manual: true,
     onSuccess() {
       // runGetCategoryById(category.id);

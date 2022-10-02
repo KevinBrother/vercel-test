@@ -12,7 +12,7 @@ interface DataType {
   tags: string[];
 }
 
-export function getColumns({ setCurrentBreadCrumbCategory, setIsEditDialogOpen, addBreadCrumb, setFlag }) {
+export function getColumns({ setParentCategory, setIsEditDialogOpen, setFlag, refreshGetCategoryById, setCurrentCategory }) {
   const columns: ColumnsType<ICategory[]> = [
     {
       title: 'Name',
@@ -40,13 +40,13 @@ export function getColumns({ setCurrentBreadCrumbCategory, setIsEditDialogOpen, 
   ]
 
   function toNext(record) {
-    setCurrentBreadCrumbCategory(record);
-    addBreadCrumb(record)
+    setParentCategory(record);
+    // addBreadCrumb(record)
   }
 
   function edit(record) {
     setFlag(EFlag.edit)
-    setCurrentBreadCrumbCategory(record)
+    setCurrentCategory(record)
     setIsEditDialogOpen(true);
   }
 

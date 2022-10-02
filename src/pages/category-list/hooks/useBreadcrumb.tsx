@@ -33,23 +33,23 @@ export function useBreadcrumb() {
   return { breadCrumbs, addBreadCrumb }
 }
 
-export function CategoryBreadcrumb({ breadCrumbs, setCurrentBreadCrumbCategory, setBreadCrumbs }) {
+export function CategoryBreadcrumb({ breadCrumbs, setParentCategory, setBreadCrumbs }) {
 
   function chooseBreadCrumb(category: ICategory, index: number) {
     const _breadCrumbs = cloneDeep(breadCrumbs);
     _breadCrumbs.splice(index);
 
     if (_breadCrumbs.length === 0) {
-      setCurrentBreadCrumbCategory({})
+      setParentCategory({})
     } else {
-      setCurrentBreadCrumbCategory(category)
+      setParentCategory(category)
     }
     setBreadCrumbs(_breadCrumbs);
   }
 
   function chooseHome() {
     // TODO 2022年10月3日 00:42:48 初始值需要定义
-    setCurrentBreadCrumbCategory({})
+    setParentCategory({})
     setBreadCrumbs([])
   }
 
