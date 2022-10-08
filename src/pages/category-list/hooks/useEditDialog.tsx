@@ -15,9 +15,12 @@ import { useRequest } from 'ahooks';
   return { isEditDialogOpen, setIsEditDialogOpen, onFinish, form }
 }; */
 
+const defaultCategory = {
+
+}
+
 export function EditDialog({
   currentCategory,
-  parentCategory,
   isEditDialogOpen,
   setIsEditDialogOpen,
   refreshGetCategoryById,
@@ -31,7 +34,7 @@ export function EditDialog({
       // 编辑和修改不一样！！！
       if (flag === EFlag.add) {
         // TODO pId 初始值
-        initialValues.pId = parentCategory.id || '';
+        initialValues.pId = currentCategory.id || '';
         initialValues.id = v4();
         initialValues.children = [];
         console.log('%c [ initialValues ]-23', 'font-size:13px; background:pink; color:#bf2c9f;', initialValues)
@@ -46,12 +49,12 @@ export function EditDialog({
       form.resetFields()
     }
 
-  }, [parentCategory, isEditDialogOpen])
+  }, [currentCategory, isEditDialogOpen])
 
 
   const [form] = Form.useForm();
 
-  const { run: runAddCategoryById } = useRequest(() => categoryService.addCategoryById(form.getFieldsValue(), parentCategory.id || ''), {
+  const { run: runAddCategoryById } = useRequest(() => categoryService.addCategoryById(form.getFieldsValue(), currentCategory.id || ''), {
     manual: true,
     onSuccess() {
       // runGetCategoryById(category.id);

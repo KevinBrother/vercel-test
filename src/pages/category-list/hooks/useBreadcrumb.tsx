@@ -3,6 +3,7 @@ import { Breadcrumb } from 'antd'
 import { cloneDeep } from 'lodash-es';
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
+import { defaultCategory } from '..';
 
 export function useBreadcrumb() {
   /* 
@@ -34,7 +35,7 @@ export function useBreadcrumb() {
   return { breadCrumbs, addBreadCrumb }
 }
 
-export function CategoryBreadcrumb({ breadCrumbs, setParentCategory, setBreadCrumbs }) {
+export function CategoryBreadcrumb({ breadCrumbs, setCurrentCategory, setBreadCrumbs }) {
 
   function chooseBreadCrumb(category: ICategory, index: number) {
 
@@ -43,20 +44,19 @@ export function CategoryBreadcrumb({ breadCrumbs, setParentCategory, setBreadCru
     }
 
     const _breadCrumbs = cloneDeep(breadCrumbs);
-    _breadCrumbs.splice(index);
+    _breadCrumbs.splice(index + 1);
 
     if (_breadCrumbs.length === 0) {
-      setParentCategory({})
+      setCurrentCategory({})
     } else {
       console.log('%c [ category ]-52', 'font-size:13px; background:pink; color:#bf2c9f;', category)
-      setParentCategory(category)
+      setCurrentCategory(category)
     }
     setBreadCrumbs(_breadCrumbs);
   }
 
   function chooseHome() {
-    // TODO 2022年10月3日 00:42:48 初始值需要定义
-    setParentCategory({})
+    setCurrentCategory(defaultCategory)
     setBreadCrumbs([])
   }
 

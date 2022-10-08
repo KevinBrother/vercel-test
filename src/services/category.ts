@@ -16,6 +16,13 @@ export const categoryService = {
     })
   },
 
+  getChildrenByCategoryId(id: string) {
+    return new Promise<ICategory[]>((resolve, reject) => {
+      const categoryList = categoryStore.getChildrenByCategoryId(id);
+      resolve(categoryList);
+    })
+  },
+
   addCategoryById(category: ICategory, id: string) {
     console.log('%c [ addCategoryById ]-13', 'font-size:13px; background:pink; color:#bf2c9f;', category)
 

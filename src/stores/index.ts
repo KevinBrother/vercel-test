@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { $storage } from '@/utils'
+import { $storage, CategoryRootPId } from '@/utils'
 import { cloneDeep } from 'lodash-es';
 
 // TODO 2022年10月1日 23:41:59 通过树来存取， 
@@ -14,10 +14,13 @@ class Category {
   getCategoryById(id: string) {
     console.log('%c [ id ]-15', 'font-size:13px; background:pink; color:#bf2c9f;', id);
     // 兼容顶层元素 TODO 2022年10月3日 00:47:56 初始化值需要定义
+    // if (id === CategoryRootPId) {
+    //   return this.getCategoryByPId(id)
+    // }
     return this.categoryList.filter(c => c.id === id) || [];
   }
 
-  getCategoryByPId(id: string) {
+  getChildrenByCategoryId(id: string) {
     // 兼容顶层元素 TODO 2022年10月3日 00:47:56 初始化值需要定义
     return this.categoryList.filter(c => c.pId === id) || [];
   }

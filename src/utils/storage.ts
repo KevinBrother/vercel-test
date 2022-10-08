@@ -17,7 +17,7 @@ function setData(key: string, data: ISafeAny) {
   localStorage.setItem(formatKey(key), JSON.stringify(data));
 }
 
-export const CategoryRootId = '0';
+export const CategoryRootPId = '0';
 
 // - [x] 遍历整棵树
 // 查找到某个节点
@@ -26,7 +26,7 @@ export const CategoryRootId = '0';
 const categoryData = [
   {
     id: '1',
-    pId: CategoryRootId,
+    pId: CategoryRootPId,
     name: '江苏',
     desc: '不错',
     children: [
@@ -56,7 +56,7 @@ const categoryData = [
   },
   {
     id: '2',
-    pId: CategoryRootId,
+    pId: CategoryRootPId,
     name: '浙江',
     desc: '不错',
     children: [

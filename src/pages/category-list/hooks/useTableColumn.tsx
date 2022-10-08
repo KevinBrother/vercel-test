@@ -13,12 +13,12 @@ interface DataType {
 }
 
 export function getColumns({
-  setParentCategory,
+  setCurrentCategory,
   setIsEditDialogOpen,
   setFlag,
   addBreadCrumb,
-  refreshGetCategoryById,
-  setCurrentCategory }) {
+  refreshGetCategoryById
+}) {
   const columns: ColumnsType<ICategory[]> = [
     {
       title: 'Name',
@@ -48,7 +48,7 @@ export function getColumns({
   ]
 
   function toNext(record) {
-    setParentCategory(record);
+    setCurrentCategory(record);
     addBreadCrumb(record)
   }
 

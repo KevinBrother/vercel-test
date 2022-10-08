@@ -5,19 +5,18 @@ import { PlusOutlined } from '@bixi-design/icons';
 import { observer } from 'mobx-react';
 import { getColumns, useBreadcrumb, useCategoryList, CategoryBreadcrumb, EditDialog } from './hooks';
 import { cloneDeep } from 'lodash-es';
-import { CategoryRootId } from '@/utils';
+import { CategoryRootPId } from '@/utils';
 
 export enum EFlag {
   add = 'ADD',
   edit = 'EDIT'
 }
 
-const defaultCategory: ICategory = {
-  id: CategoryRootId,
+export const defaultCategory: ICategory = {
+  id: CategoryRootPId,
 }
 
 export default observer(function MenuList() {
-  const [parentCategory, setParentCategory] = useState<ICategory>(defaultCategory);
   const [currentCategory, setCurrentCategory] = useState<ICategory>(defaultCategory);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [breadCrumbs, setBreadCrumbs] = useState<ICategory[]>([]);
@@ -31,12 +30,11 @@ export default observer(function MenuList() {
   const [flag, setFlag] = useState(EFlag.add);
   // TODO 2022年10月2日 12:30:53 纯hooks换成组件+hooks看看效果会不会更好
   // 列表数据
-  const { categoryList, runGetCategoryById, refreshGetCategoryById } = useCategoryList({ parentCategory });
+  const { categoryList, runGetCategoryById, refreshGetCategoryById } = useCategoryList({ currentCategory });
 
   // 列定义
   const { columns } = getColumns({
     setIsEditDialogOpen,
-    setParentCategory,
     setFlag,
     refreshGetCategoryById,
     setCurrentCategory,
@@ -54,7 +52,7 @@ export default observer(function MenuList() {
         <CategoryBreadcrumb
           breadCrumbs={breadCrumbs}
           setBreadCrumbs={setBreadCrumbs}
-          setParentCategory={setParentCategory}
+          setCurrentCategory={setCurrentCategory}
         />
         <Button icon={<PlusOutlined />} type='primary' onClick={onAdd}>
           创建类目
@@ -63,7 +61,6 @@ export default observer(function MenuList() {
       <Table striped={true} columns={columns} dataSource={categoryList} rowKey='id' />
       <EditDialog
         currentCategory={currentCategory}
-        parentCategory={parentCategory}
         isEditDialogOpen={isEditDialogOpen}
         setIsEditDialogOpen={setIsEditDialogOpen}
         refreshGetCategoryById={refreshGetCategoryById}
