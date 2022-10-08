@@ -1,10 +1,10 @@
 type ISafeAny = any;
 type AllowFn<T> = (() => T) | T;
 
-export interface ICategory {
+interface ICategory {
   id: string;
   pId: string;
-  children?: ICategory[];
+  children: ICategory[];
   name: string;
   desc: string;
   /*   updateTime: Date;

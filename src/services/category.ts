@@ -9,13 +9,6 @@ export const categoryService = {
     })
   },
 
-  getCategoryByPId(pId: string) {
-    return new Promise<ICategory[]>((resolve, reject) => {
-      const categoryList = categoryStore.getCategoryByPId(pId);
-      resolve(categoryList);
-    })
-  },
-
   getChildrenByCategoryId(id: string) {
     return new Promise<ICategory[]>((resolve, reject) => {
       const categoryList = categoryStore.getChildrenByCategoryId(id);

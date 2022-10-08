@@ -24,10 +24,10 @@
     "noEmit": true,
     "noImplicitAny": false,
     "jsx": "react-jsx",
-    "baseUrl": "src",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
-        "./*"
+        "src/*"
       ]
     }
   },
@@ -37,7 +37,7 @@
   ],
   "references": [
     {
-      "path": "./tsconfig.node.json"
+      "path": "tsconfig.node.json"
     }
   ],
 }

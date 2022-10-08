@@ -14,6 +14,10 @@ export enum EFlag {
 
 export const defaultCategory: ICategory = {
   id: CategoryRootPId,
+  pId: '',
+  children: [],
+  name: '',
+  desc: ''
 }
 
 export default observer(function MenuList() {

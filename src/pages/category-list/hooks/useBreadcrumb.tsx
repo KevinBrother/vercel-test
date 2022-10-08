@@ -67,7 +67,7 @@ export function CategoryBreadcrumb({ breadCrumbs, setCurrentCategory, setBreadCr
         breadCrumbs.map((item, index) => {
           return (
             <IfElse if={index !== breadCrumbs.length - 1}
-              else={<Breadcrumb.Item key={index} >{item.name}</Breadcrumb.Item>}>
+              else={<Breadcrumb.Item key={index + item.name} >{item.name}</Breadcrumb.Item>}>
               <Breadcrumb.Item className='cursor-pointer' key={index} onClick={() => chooseBreadCrumb(item, index)}>{item.name}</Breadcrumb.Item>
             </IfElse>
           )
