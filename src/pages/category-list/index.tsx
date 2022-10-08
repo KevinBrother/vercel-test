@@ -14,9 +14,7 @@ export enum EFlag {
 export default observer(function MenuList() {
   const [parentCategory, setParentCategory] = useState<ICategory>({});
   const [currentCategory, setCurrentCategory] = useState<ICategory>({});
-
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-
   const [breadCrumbs, setBreadCrumbs] = useState<ICategory[]>([]);
 
   function addBreadCrumb(category: ICategory) {

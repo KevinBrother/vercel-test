@@ -1,3 +1,4 @@
+import { IfElse } from '@bixi-design/core';
 import { Breadcrumb } from 'antd'
 import { cloneDeep } from 'lodash-es';
 import { useState } from 'react';
@@ -36,6 +37,11 @@ export function useBreadcrumb() {
 export function CategoryBreadcrumb({ breadCrumbs, setParentCategory, setBreadCrumbs }) {
 
   function chooseBreadCrumb(category: ICategory, index: number) {
+
+    if (index === breadCrumbs.length - 1) {
+      return;
+    }
+
     const _breadCrumbs = cloneDeep(breadCrumbs);
     _breadCrumbs.splice(index);
 
@@ -59,7 +65,10 @@ export function CategoryBreadcrumb({ breadCrumbs, setParentCategory, setBreadCru
       {
         breadCrumbs.map((item, index) => {
           return (
-            <Breadcrumb.Item className='cursor-pointer' key={index} onClick={() => chooseBreadCrumb(item, index)}>{item.name}</Breadcrumb.Item>
+            <IfElse if={index !== breadCrumbs.length - 1}
+              else={<Breadcrumb.Item key={index} >{item.name}</Breadcrumb.Item>}>
+              <Breadcrumb.Item className='cursor-pointer' key={index} onClick={() => chooseBreadCrumb(item, index)}>{item.name}</Breadcrumb.Item>
+            </IfElse>
           )
         })
       }
