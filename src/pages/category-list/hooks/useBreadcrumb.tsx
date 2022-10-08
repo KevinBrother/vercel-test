@@ -48,6 +48,7 @@ export function CategoryBreadcrumb({ breadCrumbs, setParentCategory, setBreadCru
     if (_breadCrumbs.length === 0) {
       setParentCategory({})
     } else {
+      console.log('%c [ category ]-52', 'font-size:13px; background:pink; color:#bf2c9f;', category)
       setParentCategory(category)
     }
     setBreadCrumbs(_breadCrumbs);

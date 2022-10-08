@@ -36,9 +36,10 @@ export function getColumns({
       render: (_, record) => (
         <Space size="middle">
           {/* // TODO 2022年10月3日 01:13:10 可以一直往下掉 */}
-          <IfElse if={record?.children.length > 0}>
+          {/*    <IfElse if={record?.children.length > 0}>
             <Button onClick={() => toNext(record)}>下层菜单</Button>
-          </IfElse>
+          </IfElse> */}
+          <Button onClick={() => toNext(record)}>下层菜单</Button>
           <Button onClick={() => edit(record)}>编辑</Button>
           <Button onClick={() => deleteCategory(record)}>删除</Button>
         </Space>

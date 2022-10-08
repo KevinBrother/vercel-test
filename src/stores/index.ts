@@ -12,15 +12,20 @@ class Category {
   }
 
   getCategoryById(id: string) {
-    console.log('%c [ id ]-15', 'font-size:13px; background:pink; color:#bf2c9f;', id)
+    console.log('%c [ id ]-15', 'font-size:13px; background:pink; color:#bf2c9f;', id);
     // 兼容顶层元素 TODO 2022年10月3日 00:47:56 初始化值需要定义
-    return this.categoryList.filter(c => c.pId === (id || '')) || [];
+    return this.categoryList.filter(c => c.id === id) || [];
+  }
+
+  getCategoryByPId(id: string) {
+    // 兼容顶层元素 TODO 2022年10月3日 00:47:56 初始化值需要定义
+    return this.categoryList.filter(c => c.pId === id) || [];
   }
 
   // 写的不好，不清晰
   addCategoryById(category: ICategory, id: string) {
     const parentCategory = this.categoryList.find(c => c.pId === id);
-    if (!parentCategory && category.pId !== (id || '')) {
+    if (!parentCategory && category.pId !== id) {
       return false;
     }
 
@@ -37,7 +42,7 @@ class Category {
     if (category && !category.id) {
       return false;
     }
-    console.log('%c [ editCategory category ]-31', 'font-size:13px; background:pink; color:#bf2c9f;', category)
+    // console.log('%c [ editCategory category ]-31', 'font-size:13px; background:pink; color:#bf2c9f;', category)
 
     prevCategory.name = category.name;
     prevCategory.desc = category.desc;

@@ -1,10 +1,17 @@
-import { categoryStore, ICategory } from "@/stores";
+import { categoryStore } from "@/stores";
 
 export const categoryService = {
 
   getCategoryById(id: string) {
     return new Promise<ICategory[]>((resolve, reject) => {
       const categoryList = categoryStore.getCategoryById(id);
+      resolve(categoryList);
+    })
+  },
+
+  getCategoryByPId(pId: string) {
+    return new Promise<ICategory[]>((resolve, reject) => {
+      const categoryList = categoryStore.getCategoryByPId(pId);
       resolve(categoryList);
     })
   },

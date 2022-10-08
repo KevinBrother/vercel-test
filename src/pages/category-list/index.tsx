@@ -5,15 +5,20 @@ import { PlusOutlined } from '@bixi-design/icons';
 import { observer } from 'mobx-react';
 import { getColumns, useBreadcrumb, useCategoryList, CategoryBreadcrumb, EditDialog } from './hooks';
 import { cloneDeep } from 'lodash-es';
+import { CategoryRootId } from '@/utils';
 
 export enum EFlag {
   add = 'ADD',
   edit = 'EDIT'
 }
 
+const defaultCategory: ICategory = {
+  id: CategoryRootId,
+}
+
 export default observer(function MenuList() {
-  const [parentCategory, setParentCategory] = useState<ICategory>({});
-  const [currentCategory, setCurrentCategory] = useState<ICategory>({});
+  const [parentCategory, setParentCategory] = useState<ICategory>(defaultCategory);
+  const [currentCategory, setCurrentCategory] = useState<ICategory>(defaultCategory);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [breadCrumbs, setBreadCrumbs] = useState<ICategory[]>([]);
 
