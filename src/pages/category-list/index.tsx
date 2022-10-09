@@ -22,6 +22,7 @@ export const defaultCategory: ICategory = {
 
 export default observer(function MenuList() {
   const [currentCategory, setCurrentCategory] = useState<ICategory>(defaultCategory);
+  const [editCategory, setEditCategory] = useState<ICategory>(defaultCategory);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [breadCrumbs, setBreadCrumbs] = useState<ICategory[]>([]);
 
@@ -38,6 +39,7 @@ export default observer(function MenuList() {
 
   // 列定义
   const { columns } = getColumns({
+    setEditCategory,
     setIsEditDialogOpen,
     setFlag,
     refreshGetCategoryById,
@@ -64,6 +66,7 @@ export default observer(function MenuList() {
       </div>
       <Table striped={true} columns={columns} dataSource={categoryList} rowKey='id' />
       <EditDialog
+        editCategory={editCategory}
         currentCategory={currentCategory}
         isEditDialogOpen={isEditDialogOpen}
         setIsEditDialogOpen={setIsEditDialogOpen}

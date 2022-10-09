@@ -1,11 +1,11 @@
 import { categoryService } from '@/services/category';
-import { Button, Modal, Checkbox, Form, Input } from 'antd';
+import { Modal, Form, Input } from 'antd';
 import { FormInstance } from 'antd/es/form/Form';
 import { v4 } from 'uuid'
-import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { EFlag } from '..';
+import { defaultCategory, EFlag } from '..';
 import { useRequest } from 'ahooks';
+import { CategoryRootPId } from '@/utils';
 
 /* export function useEditDialog({ runGetCategoryById, category, flag, refreshGetCategoryById }) {
 
@@ -15,11 +15,9 @@ import { useRequest } from 'ahooks';
   return { isEditDialogOpen, setIsEditDialogOpen, onFinish, form }
 }; */
 
-const defaultCategory = {
-
-}
 
 export function EditDialog({
+  editCategory,
   currentCategory,
   isEditDialogOpen,
   setIsEditDialogOpen,
@@ -28,20 +26,16 @@ export function EditDialog({
 }) {
 
   useEffect(() => {
-    // TODO 包装对象
-    let initialValues = {}
+    let initialValues = defaultCategory;
     if (isEditDialogOpen) {
       // 编辑和修改不一样！！！
       if (flag === EFlag.add) {
-        // TODO pId 初始值
-        initialValues.pId = currentCategory.id || '';
+        initialValues.pId = currentCategory.id || CategoryRootPId;
         initialValues.id = v4();
-        initialValues.children = [];
         console.log('%c [ initialValues ]-23', 'font-size:13px; background:pink; color:#bf2c9f;', initialValues)
       } else {
-        initialValues = { ...currentCategory }
+        initialValues = { ...editCategory }
       }
-      // TODO 2022年10月2日 12:48:41 判断是否有id和pid
       form.setFieldsValue(initialValues)
     }
 
@@ -49,12 +43,12 @@ export function EditDialog({
       form.resetFields()
     }
 
-  }, [currentCategory, isEditDialogOpen])
+  }, [editCategory, isEditDialogOpen])
 
 
   const [form] = Form.useForm();
 
-  const { run: runAddCategoryById } = useRequest(() => categoryService.addCategoryById(form.getFieldsValue(), currentCategory.id || ''), {
+  const { run: runAddCategoryById } = useRequest(() => categoryService.addCategory(form.getFieldsValue()), {
     manual: true,
     onSuccess() {
       // runGetCategoryById(category.id);

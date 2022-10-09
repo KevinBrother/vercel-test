@@ -13,6 +13,7 @@ interface DataType {
 }
 
 export function getColumns({
+  setEditCategory,
   setCurrentCategory,
   setIsEditDialogOpen,
   setFlag,
@@ -54,7 +55,7 @@ export function getColumns({
 
   function edit(record) {
     setFlag(EFlag.edit)
-    setCurrentCategory(record)
+    setEditCategory(record)
     setIsEditDialogOpen(true);
   }
 

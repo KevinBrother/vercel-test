@@ -16,11 +16,11 @@ export const categoryService = {
     })
   },
 
-  addCategoryById(category: ICategory, id: string) {
+  addCategory(category: ICategory) {
     console.log('%c [ addCategoryById ]-13', 'font-size:13px; background:pink; color:#bf2c9f;', category)
 
     return new Promise<Boolean>((resolve, reject) => {
-      resolve(categoryStore.addCategoryById(category, id));
+      resolve(categoryStore.addCategory(category));
     })
   },
 
