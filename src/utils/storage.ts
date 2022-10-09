@@ -83,6 +83,10 @@ const flattenedData = flattenChildren(categoryData);
 
 class Storage {
   constructor() {
+    // 如果有数据，则不设置初始值
+    if (getData('categoryList')) {
+      return;
+    }
     setData('categoryList', flattenedData);
   }
 
