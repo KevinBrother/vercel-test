@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { $storage, CategoryRootPId, CategoryRootPId } from '@/utils'
+import { $storage, CategoryRootPId } from '@/utils'
 import { cloneDeep } from 'lodash-es';
 
 // TODO 2022年10月1日 23:41:59 通过树来存取， 
@@ -42,7 +42,7 @@ class Category {
     const _categoryList = cloneDeep(this.categoryList);
 
     const prevCategory = _categoryList.find(c => c.id === category.id);
-    if (category && !category.id) {
+    if (category && !category.id || !prevCategory) {
       return false;
     }
     // console.log('%c [ editCategory category ]-31', 'font-size:13px; background:pink; color:#bf2c9f;', category)

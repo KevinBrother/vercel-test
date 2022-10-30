@@ -64,7 +64,13 @@ export default observer(function MenuList() {
           创建类目
         </Button>
       </div>
-      <Table striped={true} columns={columns} dataSource={categoryList} rowKey='id' />
+      <Table
+        striped={true}
+        columns={columns}
+        dataSource={categoryList}
+        expandable={{ showExpandColumn: false }}
+        rowKey='id'
+      />
       <EditDialog
         editCategory={editCategory}
         currentCategory={currentCategory}
