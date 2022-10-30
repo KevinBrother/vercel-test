@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import { getColumns, useBreadcrumb, useCategoryList, CategoryBreadcrumb, EditDialog } from './hooks';
 import { cloneDeep } from 'lodash-es';
 import { CategoryRootPId } from '@/utils';
+import { randomChoose } from '@/utils/common';
 
 export enum EFlag {
   add = 'ADD',
@@ -52,19 +53,6 @@ export default observer(function MenuList() {
     setFlag(EFlag.add);
   }
 
-  function randomChoose( ) {
-      const shuffled = categoryList.slice(0);
-      let i = categoryList.length;
-      const min = i - 1;
-      let temp, index;  //只是声明变量的方式, 也可以分开写
-      while (i-- > min) {
-          index = Math.floor((i + 1) * Math.random()); //这里的+1 是因为上面i--的操作  所以要加回来
-          temp = shuffled[index];  //即值交换
-          shuffled[index] = shuffled[i]; 
-          shuffled[i] = temp;
-      }
-      return shuffled.slice(min);
-    }
 
   return (
     <PageContainer>
