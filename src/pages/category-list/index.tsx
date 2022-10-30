@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { PageContainer, Table } from '@bixi-design/core';
 import { PlusOutlined } from '@bixi-design/icons';
 import { observer } from 'mobx-react';
-import { getColumns, useBreadcrumb, useCategoryList, CategoryBreadcrumb, EditDialog } from './hooks';
+import { getColumns, useCategoryList } from './hooks';
 import { cloneDeep } from 'lodash-es';
 import { CategoryRootPId } from '@/utils';
+import { CategoryBreadcrumb, EditDialog } from './components';
 
 export enum EFlag {
   add = 'ADD',
@@ -33,7 +34,6 @@ export default observer(function MenuList() {
   }
 
   const [flag, setFlag] = useState(EFlag.add);
-  // TODO 2022年10月2日 12:30:53 纯hooks换成组件+hooks看看效果会不会更好
   // 列表数据
   const { categoryList, runGetCategoryById, refreshGetCategoryById } = useCategoryList({ currentCategory });
 
