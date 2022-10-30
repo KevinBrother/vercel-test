@@ -52,6 +52,20 @@ export default observer(function MenuList() {
     setFlag(EFlag.add);
   }
 
+  function randomChoose( ) {
+      const shuffled = categoryList.slice(0);
+      let i = categoryList.length;
+      const min = i - 1;
+      let temp, index;  //只是声明变量的方式, 也可以分开写
+      while (i-- > min) {
+          index = Math.floor((i + 1) * Math.random()); //这里的+1 是因为上面i--的操作  所以要加回来
+          temp = shuffled[index];  //即值交换
+          shuffled[index] = shuffled[i]; 
+          shuffled[i] = temp;
+      }
+      return shuffled.slice(min);
+    }
+
   return (
     <PageContainer>
       <div className='mb-6 flex justify-between'>
@@ -60,6 +74,9 @@ export default observer(function MenuList() {
           setBreadCrumbs={setBreadCrumbs}
           setCurrentCategory={setCurrentCategory}
         />
+        <Button  type='primary' onClick={randomChoose}>
+          随机选菜
+        </Button>
         <Button icon={<PlusOutlined />} type='primary' onClick={onAdd}>
           创建类目
         </Button>
