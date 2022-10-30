@@ -3,6 +3,7 @@ import loadable from '@loadable/component';
 const Start = loadable(() => import('@/pages/start'));
 const MenuList = loadable(() => import('@/pages/menu-list'));
 const CategoryList = loadable(() => import('@/pages/category-list'));
+const CategoryChoose = loadable(() => import('@/pages/category-choose'));
 
 // Demo
 const RpaListDemo = loadable(() => import('@/pages/demo/rpa-list-demo'));
@@ -25,6 +26,10 @@ export const MenuRouter = [
   {
     path: "MenuList",
     element: <MenuList />,
+  },
+  {
+    path: "CategoryChoose",
+    element: <CategoryChoose />,
   },
   {
     path: "CategoryList",
