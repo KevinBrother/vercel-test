@@ -59,6 +59,8 @@ category-list
 ### 技术问题
 
 - [ ] useImmer在面包屑导航为什么不能用？
+- [ ] mobx和useImmer怎么才能一起用？
+
 ### bug
 
 - [ ]
