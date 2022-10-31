@@ -13,7 +13,7 @@ export default observer(function CategoryChoose() {
   const { rootCategory } = useRootCategory();
 
   // 默认根类目的第一个参数
-  const [currentCategoryId, setCurrentCategoryId] = useState(rootCategory.length > 0 ? rootCategory[0].id : '');
+  const [currentCategoryId, setCurrentCategoryId] = useState(rootCategory[0]?.id || '');
 
   // 列定义
   const { columns } = getColumns();
