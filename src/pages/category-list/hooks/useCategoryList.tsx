@@ -7,8 +7,8 @@ export function useCategoryList({ currentCategory }) {
 
   const { run: runGetCategoryById, refresh: refreshGetCategoryById } = useRequest(() => categoryService.getChildrenByCategoryId(currentCategory.id), {
     onSuccess(categoryList) {
-      console.log('%c [ categoryList ]-10', 'font-size:13px; background:pink; color:#bf2c9f;', categoryList)
-      setCategoryList(categoryList)
+      console.log('%c [ categoryList ]-10', 'font-size:13px; background:pink; color:#bf2c9f;', categoryList);
+      setCategoryList(categoryList);
     },
     refreshDeps: [currentCategory]
   });
@@ -19,5 +19,5 @@ export function useCategoryList({ currentCategory }) {
      });
    }, [categoryId]) */
 
-  return { categoryList, runGetCategoryById, refreshGetCategoryById }
+  return { categoryList, runGetCategoryById, refreshGetCategoryById };
 }

@@ -1,5 +1,5 @@
 import { flatData } from '@/utils';
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable } from 'mobx';
 
 const userData = [
   {
@@ -31,8 +31,7 @@ const userData = [
 ];
 
 const flattenedData = flatData(userData);
-console.log('%c [ flattenedData ]-27', 'font-size:13px; background:pink; color:#bf2c9f;', flattenedData)
-
+console.log('%c [ flattenedData ]-27', 'font-size:13px; background:pink; color:#bf2c9f;', flattenedData);
 
 class TestStore {
   arr = [1];
@@ -47,17 +46,17 @@ class TestStore {
   }
 
   getNumber(number: number) {
-    const numbers = this.arr.filter(item => item === number) || [];
+    const numbers = this.arr.filter((item) => item === number) || [];
     return numbers;
   }
 
   getUser(id: string) {
-    const users = this.users.filter(item => item.id === id);
+    const users = this.users.filter((item) => item.id === id);
     return users;
   }
 
   getChildren(id: string) {
-    const users = this.users.filter(item => item.pId === id);
+    const users = this.users.filter((item) => item.pId === id);
     return users;
   }
 }
@@ -68,14 +67,14 @@ export const testStoreService = {
   getUser(id: string) {
     return new Promise((resolve, reject) => {
       const users = testStore.getUser(id);
-      resolve(users)
-    })
+      resolve(users);
+    });
   },
 
   getChildren(id: string) {
     return new Promise((resolve, reject) => {
       const users = testStore.getChildren(id);
-      resolve(users)
-    })
+      resolve(users);
+    });
   }
-}
+};

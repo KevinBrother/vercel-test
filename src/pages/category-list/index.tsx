@@ -1,5 +1,5 @@
-import { Button } from 'antd'
-import { useState } from 'react';
+import { Button } from 'antd';
+import React, { useState } from 'react';
 import { PageContainer, Table } from '@bixi-design/core';
 import { PlusOutlined } from '@bixi-design/icons';
 import { observer } from 'mobx-react';
@@ -19,7 +19,7 @@ export const defaultCategory: ICategory = {
   children: [],
   name: '',
   desc: ''
-}
+};
 
 export default observer(function MenuList() {
   const [currentCategory, setCurrentCategory] = useState<ICategory>(defaultCategory);
@@ -52,26 +52,15 @@ export default observer(function MenuList() {
     setFlag(EFlag.add);
   }
 
-
   return (
     <PageContainer>
       <div className='mb-6 flex justify-between'>
-        <CategoryBreadcrumb
-          breadCrumbs={breadCrumbs}
-          setBreadCrumbs={setBreadCrumbs}
-          setCurrentCategory={setCurrentCategory}
-        />
+        <CategoryBreadcrumb breadCrumbs={breadCrumbs} setBreadCrumbs={setBreadCrumbs} setCurrentCategory={setCurrentCategory} />
         <Button icon={<PlusOutlined />} type='primary' onClick={onAdd}>
           创建类目
         </Button>
       </div>
-      <Table
-        striped={true}
-        columns={columns}
-        dataSource={categoryList}
-        expandable={{ showExpandColumn: false }}
-        rowKey='id'
-      />
+      <Table striped columns={columns} dataSource={categoryList} expandable={{ showExpandColumn: false }} rowKey='id' />
       <EditDialog
         editCategory={editCategory}
         currentCategory={currentCategory}
@@ -80,7 +69,6 @@ export default observer(function MenuList() {
         refreshGetCategoryById={refreshGetCategoryById}
         flag={flag}
       />
-
     </PageContainer>
-  )
-}) 
+  );
+});

@@ -1,4 +1,4 @@
-import { flattenChildren } from "./flattenChildren";
+import { flattenChildren } from './flattenChildren';
 
 function formatKey(key: string) {
   return `choose_fear_${key}`.toUpperCase();
@@ -41,18 +41,18 @@ const categoryData = [
             pId: '1-1',
             name: '通州',
             desc: '人杰地灵',
-            children: [],
+            children: []
           }
-        ],
+        ]
       },
       {
         id: '1-2',
         pId: '1',
         name: '南京',
         desc: '不错呀',
-        children: [],
+        children: []
       }
-    ],
+    ]
   },
   {
     id: '2',
@@ -65,21 +65,20 @@ const categoryData = [
         pId: '2',
         name: '杭州',
         desc: '很好',
-        children: [],
+        children: []
       },
       {
         id: '2-2',
         pId: '2',
         name: '萧山',
         desc: '不错呀',
-        children: [],
+        children: []
       }
-    ],
+    ]
   }
 ];
 
 const flattenedData = flattenChildren(categoryData);
-
 
 class Storage {
   constructor() {
@@ -96,7 +95,6 @@ class Storage {
   set categoryList(data: ICategory[]) {
     setData('categoryList', data);
   }
-
 }
 
 const $storage = new Storage();

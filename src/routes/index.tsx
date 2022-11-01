@@ -1,5 +1,6 @@
-import { BaseRouter } from './base-router'
-import { MenuRouter } from './menu-router'
+import React from 'react';
+import { BaseRouter } from './base-router';
+import { MenuRouter } from './menu-router';
 import { useRoutes, Link, BrowserRouter } from 'react-router-dom';
 
 function Container() {
@@ -10,10 +11,10 @@ function Container() {
 
 function Root() {
   return (
-    <BrowserRouter >
-      <div className="flex h-full">
+    <BrowserRouter>
+      <div className='flex h-full'>
         <ul>
-          {MenuRouter.map(router => {
+          {MenuRouter.map((router) => {
             const { path } = router;
             return (
               <li key={path}>
@@ -24,8 +25,8 @@ function Root() {
         </ul>
         <Container />
       </div>
-    </BrowserRouter >
-  )
+    </BrowserRouter>
+  );
 }
 
-export default Root
+export default Root;

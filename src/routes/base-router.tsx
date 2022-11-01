@@ -1,4 +1,5 @@
-import Start from "@/pages/start";
+import React from 'react';
+import Start from '@/pages/start';
 
 export const BaseRouter = [
   {

@@ -21,15 +21,14 @@ export function useSelectedTags(categoryList: ICategory[]) {
     */
 
     setSelectedCategory([...selectedCategory, randomChoose(categoryList)]);
-
-  }, [categoryList, selectedCategory])
+  }, [categoryList, selectedCategory]);
 
   // TODO 2022年10月31日 10:25:24 删除功能的逻辑不确定是否需要
   const removeSelected = useCallback((id: string) => {
-    console.log(id)
-  }, [])
+    console.log(id);
+  }, []);
 
-  return { selectedCategory, setSelectedCategory, startSelect, removeSelected }
+  return { selectedCategory, setSelectedCategory, startSelect, removeSelected };
 }
 
 export function useRootCategory() {
@@ -38,11 +37,11 @@ export function useRootCategory() {
   // 下拉选项数据
   useRequest(() => categoryService.getChildrenByCategoryId(CategoryRootPId), {
     onSuccess(categoryList) {
-      setRootCategory(categoryList)
-    },
+      setRootCategory(categoryList);
+    }
   });
 
-  return { rootCategory, setRootCategory }
+  return { rootCategory, setRootCategory };
 }
 
 export function useTableData(currentCategoryId: string) {
@@ -50,9 +49,9 @@ export function useTableData(currentCategoryId: string) {
 
   useRequest(() => categoryService.getChildrenByCategoryId(currentCategoryId), {
     onSuccess(categoryList) {
-      setTableData(categoryList)
+      setTableData(categoryList);
     },
     refreshDeps: [currentCategoryId]
   });
-  return { tableData }
+  return { tableData };
 }

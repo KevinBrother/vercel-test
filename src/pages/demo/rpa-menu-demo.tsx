@@ -1,5 +1,6 @@
-import { ReactIcon } from "@/assets";
-import { RpaMenu } from "@/components";
+import React from 'react';
+import { ReactIcon } from '@/assets';
+import { RpaMenu } from '@/components';
 
 export default function RpaListDemo() {
   const data = [
@@ -24,9 +25,7 @@ export default function RpaListDemo() {
         console.log(value);
       }
     }
-  ]
+  ];
 
-  return (
-    <RpaMenu dataSource={data} defaultKey="2" />
-  )
-} 
+  return <RpaMenu dataSource={data} defaultKey='2' />;
+}
