@@ -57,7 +57,7 @@
     }
   },
   "lint-staged": {
-    "**/*.{tsx,ts}": "eslint",
-    "**/*.less": "stylelint"
+    "src/**/*.{tsx,ts}": "eslint",
+    "src/**/*.less": "stylelint"
   }
 }

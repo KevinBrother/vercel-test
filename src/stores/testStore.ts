@@ -1,4 +1,4 @@
-import { flatData } from '@/utils';
+import { flattenChildren } from '@/utils';
 import { makeAutoObservable } from 'mobx';
 
 const userData = [
@@ -30,7 +30,7 @@ const userData = [
   }
 ];
 
-const flattenedData = flatData(userData);
+const flattenedData = flattenChildren(userData);
 console.log('%c [ flattenedData ]-27', 'font-size:13px; background:pink; color:#bf2c9f;', flattenedData);
 
 class TestStore {

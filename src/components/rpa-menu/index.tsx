@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, LegacyRef } from 'react';
 import classnames from 'classnames';
 import $ from 'jquery';
 import './index.less';
@@ -9,12 +9,12 @@ interface IRpaMenu {
   onClick: Function;
 }
 export function RpaMenu({ dataSource, defaultKey }: { dataSource: IRpaMenu[]; defaultKey: string }) {
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const lis = menuRef?.current?.querySelectorAll('li');
+    const lis = menuRef?.current?.querySelectorAll('li')!;
     const liFindIndex = [].findIndex.bind(lis);
-    const activeIndex = liFindIndex((item) => item.className === 'active');
+    const activeIndex = liFindIndex((item: HTMLElement) => item.className === 'active');
 
     if (activeIndex > 0) {
       lis[activeIndex - 1].classList.add('active-prev');
