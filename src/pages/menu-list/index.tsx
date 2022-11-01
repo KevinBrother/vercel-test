@@ -1,4 +1,5 @@
-import { Table } from 'antd'
+import React from 'react';
+import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { mock, Random } from 'mockjs';
 
@@ -14,14 +15,14 @@ const columns: ColumnsType<DataType> = [
   {
     title: 'Name',
     dataIndex: 'name',
-    key: 'name',
+    key: 'name'
   },
   {
     title: 'Age',
     dataIndex: 'age',
-    key: 'age',
+    key: 'age'
   }
-]
+];
 
 const data: DataType[] = [
   {
@@ -29,22 +30,22 @@ const data: DataType[] = [
     name: 'John Brown',
     age: 32,
     address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
+    tags: ['nice', 'developer']
   },
   {
     key: '2',
     name: 'Jim Green',
     age: 42,
     address: 'London No. 1 Lake Park',
-    tags: ['loser'],
+    tags: ['loser']
   },
   {
     key: '3',
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
+    tags: ['cool', 'teacher']
+  }
 ];
 
 /* var mockData = mock({
@@ -56,22 +57,20 @@ const data: DataType[] = [
     address: mock('@city')
   }]
 }) */
-var mockData = mock({
-  "list|1-10": [
+const mockData = mock({
+  'list|1-10': [
     {
       key: '@increment(1)',
       age: '@integer(20, 70)',
-      name: "@ctitle",
-      address: "@cparagraph",
-      "add_time": "@date(yyyy-MM-dd hh:mm:ss)"
+      name: '@ctitle',
+      address: '@cparagraph',
+      add_time: '@date(yyyy-MM-dd hh:mm:ss)'
     }
   ]
-})
+});
 
 console.log('%c [ mockData ]-51', 'font-size:13px; background:pink; color:#bf2c9f;', mockData);
 
 export default function MenuList() {
-  return (
-    <Table columns={columns} dataSource={mockData.list} />
-  )
+  return <Table columns={columns} dataSource={mockData.list} />;
 }

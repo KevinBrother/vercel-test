@@ -1,5 +1,5 @@
-import { Button, Divider, Select, Tag } from 'antd'
-import { useState } from 'react';
+import { Button, Divider, Select, Tag } from 'antd';
+import React, { useState } from 'react';
 import { PageContainer, Table } from '@bixi-design/core';
 import { observer } from 'mobx-react';
 import { getColumns } from './getColumns';
@@ -19,7 +19,7 @@ export default observer(function CategoryChoose() {
   const { columns } = getColumns();
 
   // 列表
-  const { tableData } = useTableData(currentCategoryId)
+  const { tableData } = useTableData(currentCategoryId);
 
   // 选项数据
   const { selectedCategory, startSelect, removeSelected } = useSelectedTags(tableData);
@@ -28,41 +28,34 @@ export default observer(function CategoryChoose() {
     <PageContainer className='category-choose-container'>
       <div className='flex'>
         <div>已选： </div>
-        <div className="select-tags">
-          {
-            selectedCategory.map(({ id, name }, index) => (
-              <Tag closable key={index} onClose={() => removeSelected(id)}>
-                {name}
-              </Tag>
-            ))
-          }
+        <div className='select-tags'>
+          {selectedCategory.map(({ id, name }, index) => (
+            <Tag closable key={index} onClose={() => removeSelected(id)}>
+              {name}
+            </Tag>
+          ))}
         </div>
       </div>
 
       <div className='mt-10'>
         <div>
           {/* // TODO 默认选中第一个 */}
-          <Select
-            defaultValue={rootCategory[0]?.id || ''}
-            style={{ width: 120 }}
-            onChange={(value: string) => setCurrentCategoryId(value)}>
-            {
-              rootCategory.map((item, index) => {
-                return <Option key={index} value={item.id}>{item.name}</Option>
-              })
-            }
+          <Select defaultValue={rootCategory[0]?.id || ''} style={{ width: 120 }} onChange={(value: string) => setCurrentCategoryId(value)}>
+            {rootCategory.map((item, index) => {
+              return (
+                <Option key={index} value={item.id}>
+                  {item.name}
+                </Option>
+              );
+            })}
           </Select>
-          <Button className='ml-20' type="primary" onClick={startSelect}>开选</Button>
+          <Button className='ml-20' type='primary' onClick={startSelect}>
+            开选
+          </Button>
         </div>
         <Divider />
-        <Table
-          striped={true}
-          columns={columns}
-          dataSource={tableData}
-          expandable={{ showExpandColumn: false }}
-          rowKey='id'
-        />
+        <Table striped columns={columns} dataSource={tableData} expandable={{ showExpandColumn: false }} rowKey='id' />
       </div>
-    </PageContainer >
-  )
-})
+    </PageContainer>
+  );
+});

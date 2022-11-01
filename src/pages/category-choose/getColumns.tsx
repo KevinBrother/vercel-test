@@ -1,6 +1,6 @@
-
+import React from 'react';
 import type { ColumnsType } from 'antd/es/table';
-import { Button, Space } from 'antd'
+import { Button, Space } from 'antd';
 import { IfElse } from '@bixi-design/core';
 
 interface DataType {
@@ -16,25 +16,25 @@ export function getColumns() {
     {
       title: 'Name',
       dataIndex: 'name',
-      key: 'name',
+      key: 'name'
     },
     {
       title: 'desc',
       dataIndex: 'desc',
-      key: 'desc',
+      key: 'desc'
     },
     {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
-        <Space size="middle">
+        <Space size='middle'>
           {/*  <Button onClick={() => toNext(record)}>下层菜单</Button>
           <Button onClick={() => edit(record)}>编辑</Button>
           <Button onClick={() => deleteCategory(record)}>删除</Button> */}
         </Space>
-      ),
-    },
-  ]
+      )
+    }
+  ];
   /* 
     function toNext(record) {
       setCurrentCategory(record);
@@ -51,5 +51,5 @@ export function getColumns() {
       console.log('delete');
     }
    */
-  return { columns }
+  return { columns };
 }
