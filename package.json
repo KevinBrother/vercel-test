@@ -8,7 +8,9 @@
     "preview": "vite preview",
     "lint": "yarn lint:ts && yarn lint:style",
     "lint:ts": "eslint ./src --ext .ts,.js,.tsx --fix",
-    "lint:style": "stylelint './**/*.less' --custom-syntax postcss-less"
+    "lint:style": "stylelint './**/*.less' --custom-syntax postcss-less",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@bixi-design/core": "2.2.2",
@@ -50,7 +52,8 @@
     "typescript": "*",
     "vite": "^3.1.0",
     "vite-plugin-svgr": "^0.6.0",
-    "vite-tsconfig-paths": "^3.3.17"
+    "vite-tsconfig-paths": "^3.3.17",
+    "vitest": "^0.28.1"
   },
   "husky": {
     "hooks": {
